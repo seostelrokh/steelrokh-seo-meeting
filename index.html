@@ -1,0 +1,1193 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>داشبرد سئو استیل رخ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: command-center — steel hero band with health index, tile launcher grid (radar tile spans 2), each tile opens a full module view with a module switcher strip */
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --surface-2:#f3f6f9; --surface-3:#e6ecf2;
+  --fg:#0f1c27; --muted:#5b6c7b; --line:#d9e1e8;
+  --hero:#0b3954; --hero-2:#12577c; --on-hero:#ffffff; --on-hero-muted:#b9d3e4;
+  --accent:#1597c4;
+  --us:#1597c4; --c1:#e08a1e; --c2:#7b5cc4; --c3:#d0537a; --c4:#8a9ba8;
+  --good:#1d9a55; --good-soft:#e1f4e8;
+  --warn:#c97a10; --warn-soft:#fbeeda;
+  --crit:#d24343; --crit-soft:#fae2e2;
+  --shadow:0 1px 2px rgba(15,28,39,.06),0 6px 20px rgba(15,28,39,.06);
+  --font:'Dana','Vazirmatn',system-ui,Tahoma,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#09121a; --surface:#101c27; --surface-2:#152433; --surface-3:#1b2d3e;
+  --fg:#e5edf3; --muted:#8ea2b3; --line:#21364a;
+  --hero:#0c2638; --hero-2:#123a55; --on-hero:#ffffff; --on-hero-muted:#9fbfd4;
+  --accent:#3cc0e8;
+  --us:#3cc0e8; --c1:#f0a640; --c2:#a58ae6; --c3:#e77a9c; --c4:#9fb0bd;
+  --good:#3cc87a; --good-soft:#11301f;
+  --warn:#eaa94e; --warn-soft:#372912;
+  --crit:#ef6b6b; --crit-soft:#3a1b1b;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#09121a; --surface:#101c27; --surface-2:#152433; --surface-3:#1b2d3e;
+  --fg:#e5edf3; --muted:#8ea2b3; --line:#21364a;
+  --hero:#0c2638; --hero-2:#123a55; --on-hero:#ffffff; --on-hero-muted:#9fbfd4;
+  --accent:#3cc0e8;
+  --us:#3cc0e8; --c1:#f0a640; --c2:#a58ae6; --c3:#e77a9c; --c4:#9fb0bd;
+  --good:#3cc87a; --good-soft:#11301f;
+  --warn:#eaa94e; --warn-soft:#372912;
+  --crit:#ef6b6b; --crit-soft:#3a1b1b;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);direction:rtl;line-height:1.7;margin:0;font-variant-numeric:tabular-nums;font-size:14px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--hero)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1240px;margin:0 auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Top bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hero);color:var(--on-hero);border-bottom:1px solid rgba(255,255,255,.08)}
+.tb{display:flex;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:0;padding:0;color:var(--on-hero)}
+.logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--hero-2));display:grid;place-items:center;flex:none}
+.brand b{font-size:1rem;font-weight:800;letter-spacing:-.01em}
+.brand span{font-size:.75rem;color:var(--on-hero-muted);font-weight:500}
+.tb .sp{flex:1}
+.pill{font-size:.75rem;color:var(--on-hero-muted);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:3px 11px}
+.themebtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:var(--on-hero);border-radius:8px;padding:4px 11px;font-size:.78rem;cursor:pointer}
+.themebtn:hover{background:rgba(255,255,255,.16)}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,var(--hero) 0%,var(--hero-2) 100%);color:var(--on-hero);position:relative;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:auto 1fr minmax(240px,300px);gap:36px;align-items:center;padding-block:36px 40px;position:relative;z-index:1}
+.ring-box{position:relative;width:148px;height:148px;flex:none}
+.ring-box .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring-box .num b{font-size:2.6rem;font-weight:800;line-height:1;display:block}
+.ring-box .num small{font-size:.7rem;color:var(--on-hero-muted);display:block;margin-top:4px}
+.hero h1{font-size:1.55rem;margin:0 0 6px;font-weight:800;text-wrap:balance;letter-spacing:-.015em}
+.hero p{margin:0;color:var(--on-hero-muted);font-size:.9rem;max-width:58ch}
+.hero-kpis{display:flex;gap:32px;flex-wrap:wrap;margin-top:22px}
+.hk{min-width:0}
+.hk .l{font-size:.7rem;color:var(--on-hero-muted)}
+.hk .v{font-size:1.15rem;font-weight:800}
+.hk .v em{font-style:normal;font-size:.72rem;font-weight:600;margin-inline-start:4px}
+.hk .v em.up{color:#7ee2a6}.hk .v em.down{color:#ff9d9d}
+.board{border-inline-start:1px solid rgba(255,255,255,.14);padding-inline-start:24px}
+.board h3{margin:0 0 8px;font-size:.78rem;color:var(--on-hero-muted);font-weight:600;letter-spacing:.02em}
+.brow{display:grid;grid-template-columns:18px 1fr 90px 30px;align-items:center;gap:8px;padding:4px 0;font-size:.82rem}
+.brow .rk{color:var(--on-hero-muted);font-size:.72rem}
+.brow.me{font-weight:800}
+.brow .trk{height:6px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}
+.brow .trk i{display:block;height:100%;border-radius:4px}
+.brow .sc{text-align:left;font-weight:700}
+
+/* Sample banner */
+.sample{font-size:.76rem;color:var(--muted);margin-top:18px;display:flex;align-items:center;gap:8px}
+.sample::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warn);flex:none}
+
+/* Tiles */
+.sec-title{display:flex;align-items:baseline;gap:10px;margin:30px 0 16px;flex-wrap:wrap}
+.sec-title h2{margin:0;font-size:1.05rem;font-weight:800}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;grid-auto-flow:dense}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:right;cursor:pointer;display:flex;flex-direction:column;gap:16px;min-width:0;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;position:relative}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent)}
+.tile.wide{grid-column:span 2}
+.t-head{display:flex;align-items:center;gap:10px}
+.t-ico{width:34px;height:34px;border-radius:9px;background:var(--surface-3);display:grid;place-items:center;color:var(--accent);flex:none}
+.t-name{font-weight:700;font-size:.95rem}
+.t-go{margin-inline-start:auto;color:var(--muted);font-size:1.1rem;transition:transform .18s}
+.tile:hover .t-go{transform:translateX(-4px);color:var(--accent)}
+.t-stat{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.t-big{font-size:1.9rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+.t-big small{font-size:.8rem;font-weight:600;color:var(--muted);margin-inline-start:4px}
+.t-sub{font-size:.78rem;color:var(--muted)}
+.t-foot{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.feed-mini{display:flex;flex-direction:column;gap:7px}
+.fm{display:flex;gap:8px;align-items:center;font-size:.8rem;min-width:0}
+.fm .who{font-weight:700;flex:none}
+.fm .what{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;color:var(--crit)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--crit);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--crit) 60%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.g{background:var(--good-soft);color:var(--good)} .w{background:var(--warn-soft);color:var(--warn)} .c{background:var(--crit-soft);color:var(--crit)} .n{background:var(--surface-3);color:var(--muted)}
+.up{color:var(--good)} .down{color:var(--crit)}
+
+/* Module view */
+.mod-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0 6px}
+.back{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:6px 12px;cursor:pointer;font-size:.82rem;font-weight:600}
+.back:hover{border-color:var(--accent);color:var(--accent)}
+.mod-head h1{margin:0;font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.mod-desc{color:var(--muted);font-size:.86rem;margin:0 0 14px;max-width:80ch}
+.switch{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:thin}
+.switch button{flex:none;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:.8rem;cursor:pointer;color:var(--muted);font-weight:600}
+.switch button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.switch button:hover:not(.on){color:var(--fg);border-color:var(--accent)}
+
+.grid{display:grid;gap:20px}
+#mod-body>*+*{margin-top:20px!important}
+.card{padding:22px!important}
+.card .hint{margin-bottom:16px!important}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g21{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.card h3{margin:0 0 4px;font-size:.92rem;font-weight:700}
+.card .hint{font-size:.76rem;color:var(--muted);margin:0 0 12px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat .l{font-size:.76rem;color:var(--muted)}
+.stat .v{font-size:1.6rem;font-weight:800;line-height:1.15}
+.stat .d{font-size:.76rem;font-weight:600}
+
+svg.chart{width:100%;height:auto;display:block;font-family:var(--font);direction:ltr}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.76rem;color:var(--muted);margin-top:8px}
+.legend button{background:none;border:0;padding:2px 4px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.76rem;border-radius:6px}
+.legend button.off{opacity:.35}
+.sw{width:12px;height:4px;border-radius:2px;display:inline-block}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.84rem;min-width:560px}
+th,td{padding:9px 11px;text-align:right;white-space:nowrap}
+thead th{background:var(--surface-2);color:var(--muted);font-weight:600;font-size:.76rem}
+thead th[data-k]{cursor:pointer;user-select:none}
+thead th[data-k]:hover{color:var(--fg)}
+tbody tr{border-top:1px solid var(--line)}
+tbody tr:hover{background:var(--surface-2)}
+td.kw{font-weight:600;white-space:normal;min-width:150px}
+tr.me td{background:color-mix(in srgb,var(--us) 8%,transparent)}
+.rk{display:inline-flex;justify-content:center;min-width:30px;padding:2px 7px;border-radius:7px;font-weight:700;font-size:.8rem}
+.rk.t{background:var(--good-soft);color:var(--good)}
+.rk.m{background:var(--warn-soft);color:var(--warn)}
+.rk.l{background:var(--crit-soft);color:var(--crit)}
+.rk.x{background:var(--surface-3);color:var(--muted)}
+.rk.us{box-shadow:inset 0 0 0 2px var(--us)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fbtn{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.76rem;cursor:pointer;font-weight:600;color:var(--muted)}
+.fbtn.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+/* stacked dist */
+.dist{display:flex;flex-direction:column;gap:9px}
+.drow{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;font-size:.8rem}
+.drow b{font-weight:700}
+.dbar{display:flex;height:20px;border-radius:6px;overflow:hidden;background:var(--surface-3)}
+.dbar i{display:grid;place-items:center;font-style:normal;font-size:.68rem;font-weight:700;color:#fff;min-width:0}
+
+/* bars */
+.brs{display:flex;flex-direction:column;gap:7px}
+.br{display:grid;grid-template-columns:86px 1fr 54px;gap:8px;align-items:center;font-size:.8rem}
+.br .tr{height:12px;background:var(--surface-3);border-radius:5px;overflow:hidden}
+.br .tr i{display:block;height:100%;border-radius:5px}
+.br .nv{text-align:left;font-weight:700;color:var(--muted);font-size:.76rem}
+
+/* radar feed */
+.feed{display:flex;flex-direction:column}
+.ev{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+.ev:first-child{border-top:0}
+.ev-ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:.7rem;color:#fff}
+.ev-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ev-top .who{font-weight:800}
+.ev-top .date{color:var(--muted);font-size:.74rem;margin-inline-start:auto}
+.ev-t{font-weight:600;margin-top:2px}
+.ev-url{font-family:ui-monospace,Consolas,monospace;font-size:.74rem;color:var(--muted);direction:ltr;text-align:right;overflow-wrap:anywhere}
+.ev-act{margin-top:7px;background:var(--surface-2);border-radius:8px;padding:7px 11px;font-size:.8rem;border-inline-start:3px solid var(--accent)}
+.ev-act b{color:var(--accent)}
+.compcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.cc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:right;min-width:0}
+.cc.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.cc .nm{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.86rem}
+.cc .cnt{font-size:1.5rem;font-weight:800;margin-top:4px;line-height:1.1}
+.cc .cnt small{font-size:.72rem;color:var(--muted);font-weight:600}
+.weeks{display:flex;gap:3px;align-items:flex-end;height:26px;margin-top:6px}
+.weeks i{flex:1;border-radius:2px;min-height:3px}
+
+/* heatmap */
+.hm{border-collapse:separate;border-spacing:4px;min-width:560px}
+.hm th{background:none;font-size:.76rem;color:var(--muted);font-weight:600;padding:4px 6px}
+.hm td{border-radius:8px;text-align:center;font-weight:700;font-size:.82rem;padding:10px 6px}
+.hm td.kw{text-align:right;background:none;font-size:.84rem}
+.hm tr{border:0}
+.hm tbody tr:hover{background:none}
+
+/* checklist */
+.chk{display:flex;flex-direction:column;gap:9px}
+.ci{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--surface-2)}
+.ci .st{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:.75rem;font-weight:800;flex:none}
+.ci .tt{font-weight:700;font-size:.85rem}
+.ci .dd{font-size:.78rem;color:var(--muted)}
+
+footer{margin:44px 0 30px;color:var(--muted);font-size:.76rem;text-align:center;border-top:1px solid var(--line);padding-top:16px}
+
+.fade{animation:fadein .35s ease both}
+@keyframes fadein{from{opacity:.0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (max-width:1040px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-in{grid-template-columns:auto 1fr}
+  .board{grid-column:1/-1}
+  .compcards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .g2,.g21{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .tiles{grid-template-columns:1fr}
+  .tile.wide,.tile.big{grid-column:auto;grid-row:auto}
+  .hero-in{grid-template-columns:1fr;justify-items:start}
+  .hero h1{font-size:1.25rem}
+  .compcards{grid-template-columns:1fr 1fr}
+  .tb .pill{display:none}
+}
+</style>
+
+<div class="topbar">
+  <div class="wrap tb">
+    <button class="brand" id="home-btn" type="button" aria-label="بازگشت به صفحه اصلی">
+      <span class="logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>
+      <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.25"><b>SEO Intelligence</b><span>استیل رخ</span></span>
+    </button>
+    <div class="sp"></div>
+    <span class="pill" id="snapshot-date">نسخهٔ جلسه</span>
+    <button class="themebtn" id="themebtn" type="button">تغییر تم</button>
+  </div>
+</div>
+
+<div id="home">
+  <section class="hero">
+    <div class="wrap hero-in" id="hero"></div>
+  </section>
+  <main class="wrap">
+    <div class="sample" id="sample-note">داده‌ها نمونه و فرضی هستند</div>
+    <div class="sec-title"><h2>ماژول‌ها</h2></div>
+    <div class="tiles" id="tiles"></div>
+    <footer>داشبرد SEO Intelligence استیل رخ · پایش رتبه، تحرکات رقبا، گپ کلمات و لینک، و سلامت فنی</footer>
+  </main>
+</div>
+
+<div id="module" hidden>
+  <main class="wrap">
+    <div class="mod-head">
+      <button class="back" id="back" type="button">→ همه ماژول‌ها</button>
+      <h1 id="mod-title"></h1>
+    </div>
+    <p class="mod-desc" id="mod-desc"></p>
+    <div class="switch" id="switch"></div>
+    <div id="mod-body"></div>
+  </main>
+</div>
+
+<script type="application/json" id="meeting-data">{"gsc":{"source":"Google Search Console","site_url":"https://steelrokh.com/","is_sample":false,"period":{"start":"2026-10-25","end":"2026-11-21","days":28},"previous_period":{"start":"2026-09-27","end":"2026-10-24","days":28},"totals":{"current":{"clicks":17660,"impressions":334149,"ctr":0.0529,"position":11.02},"previous":{"clicks":16409,"impressions":311654,"ctr":0.0527,"position":12.46}},"generated_at":"2026-11-24T18:45:06+00:00","keywords":[{"keyword":"قیمت ورق استیل","intent":"transactional","found":true,"clicks":94,"impressions":1751,"ctr":0.0537,"position":6.98,"prev_position":7.06},{"keyword":"خرید ورق استیل ضدزنگ","intent":"transactional","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"قیمت لوله استیل","intent":"transactional","found":true,"clicks":60,"impressions":777,"ctr":0.0772,"position":9.02,"prev_position":14.23},{"keyword":"فروش اتصالات استیل","intent":"transactional","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"قیمت میلگرد استیل","intent":"transactional","found":true,"clicks":10,"impressions":236,"ctr":0.0424,"position":6.89,"prev_position":7.41},{"keyword":"انواع ورق استیل","intent":"commercial","found":true,"clicks":0,"impressions":136,"ctr":0,"position":27.1,"prev_position":39.42},{"keyword":"تفاوت استیل ۳۰۴ و ۳۱۶","intent":"commercial","found":true,"clicks":0,"impressions":76,"ctr":0,"position":5.91,"prev_position":8.31},{"keyword":"گرید استیل ضدزنگ","intent":"commercial","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"بهترین استیل برای صنایع غذایی","intent":"commercial","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"استیل داپلکس چیست","intent":"commercial","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"استیل ضدزنگ چیست","intent":"informational","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"کاربرد فولاد ضدزنگ","intent":"informational","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"محاسبه وزن ورق استیل","intent":"informational","found":true,"clicks":78,"impressions":157,"ctr":0.4968,"position":1.97,"prev_position":2.42},{"keyword":"خواص فولاد ضدزنگ","intent":"informational","found":false,"clicks":0,"impressions":0,"ctr":0,"position":null,"prev_position":null},{"keyword":"تفاوت استیل و فولاد","intent":"informational","found":true,"clicks":0,"impressions":18,"ctr":0,"position":7.44,"prev_position":8.7}]},"technical":{"meta":{"generated":"2026-11-23T05:30:03Z","script_version":"2.0","is_sample":false,"source_field":"Chrome UX Report API — کاربران واقعی Chrome، ۲۸ روز، صدک ۷۵","source_lab":"PageSpeed Insights (Lighthouse) — آزمایشگاهی، یک اجرا","period":{"first":"2026-10-25","last":"2026-11-21"},"notes":["ایران استیل آنلاین — desktop: ترافیک کافی برای CrUX ندارد","پولاد — desktop: ترافیک کافی برای CrUX ندارد","PageSpeed برای https://www.fooladiranian.com/ (desktop) نتیجه نداد: Lighthouse returned error: FAILED_DOCUMENT_REQUEST. Lighthouse was unable to reliably load the page you requested. Make sure you are testing the correct URL and that the server is properly responding to all requests. (Details: net::ERR_TIMED_OUT)","گروه کانکا — desktop: ترافیک کافی برای CrUX ندارد"]},"sites":{"us":{"label":"استیل رخ","origin":"https://steelrokh.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2903,"inp":144,"cls":0.08,"fcp":2627,"ttfb":2007,"rtt":294},"dist":{"lcp":[70.4,15.3,14.3],"inp":[83.8,11.7,4.5],"cls":[85.1,6.5,8.4],"fcp":[64.4,14.9,20.7],"ttfb":[48.6,24.3,27.1]},"parts":{"ttfb":2118,"delay":199,"dur":544,"render":297},"lcp_image":51.6,"nav":{"navigate":81.2,"navigate_cache":4.6,"reload":6,"restore":0,"back_forward":4.6,"back_forward_cache":3.6,"prerender":0},"lab":{"score":87,"fp":2330,"dcl":1041,"onload":1253,"viewport_ok":null,"opps":[{"t":"Reduce unused CSS","ms":300}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":3962,"inp":45,"cls":0.01,"fcp":3530,"ttfb":3147,"rtt":243},"dist":{"lcp":[56.7,19.3,24],"inp":[98,1.2,0.8],"cls":[92.7,4.5,2.8],"fcp":[52.3,16.6,31.1],"ttfb":[45.6,12.1,42.3]},"parts":{"ttfb":2698,"delay":187,"dur":272,"render":311},"lcp_image":64.4,"nav":null,"lab":{"score":100,"fp":1241,"dcl":1607,"onload":1797,"viewport_ok":null,"opps":[]}},"extra":{"idx":340,"https":"yes","mobile_friendly":null,"schema":"no"}},"c1":{"label":"آهن آنلاین","origin":"https://ahanonline.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2425,"inp":160,"cls":0,"fcp":1995,"ttfb":1007,"rtt":299},"dist":{"lcp":[76,13,11],"inp":[82.3,14,3.7],"cls":[95.7,0.8,3.5],"fcp":[71,15.6,13.4],"ttfb":[67,21.3,11.7]},"parts":{"ttfb":947,"delay":611,"dur":440,"render":372},"lcp_image":63.5,"nav":{"navigate":72.5,"navigate_cache":8.6,"reload":7.3,"restore":0,"back_forward":2.5,"back_forward_cache":8.6,"prerender":0.5},"lab":{"score":47,"fp":1330,"dcl":1557,"onload":10647,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":1200},{"t":"Use efficient cache lifetimes","ms":300},{"t":"Improve image delivery","ms":150}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":1735,"inp":61,"cls":0.02,"fcp":1203,"ttfb":665,"rtt":222},"dist":{"lcp":[85.9,6.8,7.3],"inp":[98.4,1.2,0.4],"cls":[86.3,10.2,3.5],"fcp":[86,7.7,6.3],"ttfb":[81.2,12.4,6.4]},"parts":{"ttfb":639,"delay":372,"dur":385,"render":159},"lcp_image":92.8,"nav":{"navigate":75.7,"navigate_cache":9.1,"reload":5.7,"restore":1.8,"back_forward":2,"back_forward_cache":3.6,"prerender":2},"lab":{"score":60,"fp":909,"dcl":1176,"onload":10424,"viewport_ok":null,"opps":[{"t":"Use efficient cache lifetimes","ms":500},{"t":"Improve image delivery","ms":250},{"t":"Reduce unused JavaScript","ms":160}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c2":{"label":"ایران استیل آنلاین","origin":"https://iransteelonline.ir","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2336,"inp":120,"cls":0.09,"fcp":2006,"ttfb":1104,"rtt":308},"dist":{"lcp":[78,13.9,8.1],"inp":[90.3,7.7,2],"cls":[76,10.9,13.1],"fcp":[70.9,15.9,13.2],"ttfb":[65.7,19.8,14.5]},"parts":{"ttfb":1093,"delay":798,"dur":240,"render":182},"lcp_image":null,"nav":null,"lab":{"score":67,"fp":5288,"dcl":6033,"onload":6522,"viewport_ok":null,"opps":[{"t":"Improve image delivery","ms":1350},{"t":"Reduce unused CSS","ms":150},{"t":"Reduce unused JavaScript","ms":150}]}},"desktop":{"ok":false,"reason":"ترافیک کافی برای CrUX ندارد","lab":{"score":92,"fp":3239,"dcl":4200,"onload":4436,"viewport_ok":null,"opps":[]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c3":{"label":"تجارت آلیاژ","origin":"https://www.tejarataliaj.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":3143,"inp":91,"cls":0,"fcp":3023,"ttfb":1625,"rtt":292},"dist":{"lcp":[60.5,24.5,15],"inp":[89.3,5.4,5.3],"cls":[96.9,2.4,0.7],"fcp":[42.2,32.5,25.3],"ttfb":[40,39,21]},"parts":{"ttfb":1212,"delay":197,"dur":372,"render":1042},"lcp_image":29.2,"nav":{"navigate":91.2,"navigate_cache":2.9,"reload":3.6,"restore":0,"back_forward":0.4,"back_forward_cache":1.9,"prerender":0},"lab":{"score":93,"fp":2113,"dcl":2880,"onload":3280,"viewport_ok":null,"opps":[{"t":"Reduce unused CSS","ms":150},{"t":"Reduce unused JavaScript","ms":150}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":3068,"inp":38,"cls":0.04,"fcp":2738,"ttfb":1588,"rtt":231},"dist":{"lcp":[64.8,17.3,17.9],"inp":[98.1,0.8,1.1],"cls":[91.2,7.1,1.7],"fcp":[55,23.1,21.9],"ttfb":[47.2,33.6,19.2]},"parts":{"ttfb":1598,"delay":103,"dur":294,"render":964},"lcp_image":null,"nav":null,"lab":{"score":97,"fp":2314,"dcl":2637,"onload":2952,"viewport_ok":null,"opps":[]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c4":{"label":"پولاد","origin":"https://polad.ir","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2584,"cls":0.01,"fcp":2503,"ttfb":1043,"rtt":266},"dist":{"lcp":[73.2,16.7,10.1],"cls":[87.2,6.3,6.5],"fcp":[56.2,26.1,17.7],"ttfb":[65.9,24.8,9.3]},"parts":{},"lcp_image":8.5,"nav":{"navigate":83.9,"navigate_cache":0,"reload":4.5,"restore":0,"back_forward":11.6,"back_forward_cache":0,"prerender":0},"lab":{"score":72,"fp":1951,"dcl":2592,"onload":2872,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":1100},{"t":"Use efficient cache lifetimes","ms":300},{"t":"Reduce unused CSS","ms":160},{"t":"Improve image delivery","ms":150}]}},"desktop":{"ok":false,"reason":"ترافیک کافی برای CrUX ندارد","lab":{"score":87,"fp":1035,"dcl":1586,"onload":1944,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":200}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c5":{"label":"فولاد ایرانیان","origin":"https://www.fooladiranian.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2594,"inp":249,"cls":0.15,"fcp":2446,"ttfb":732,"rtt":270},"dist":{"lcp":[73.3,15.2,11.5],"inp":[68.5,20.4,11.1],"cls":[50.4,44.9,4.7],"fcp":[59.4,23.2,17.4],"ttfb":[76.9,14.3,8.8]},"parts":{"ttfb":685,"delay":307,"dur":450,"render":911},"lcp_image":83.6,"nav":{"navigate":92.7,"navigate_cache":1.3,"reload":4.9,"restore":0,"back_forward":1,"back_forward_cache":0.1,"prerender":0},"lab":{"score":63,"fp":2595,"dcl":2993,"onload":4704,"viewport_ok":null,"opps":[{"t":"Improve image delivery","ms":200},{"t":"Reduce unused JavaScript","ms":150}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2335,"inp":76,"cls":0.2,"fcp":2105,"ttfb":988,"rtt":219},"dist":{"lcp":[78.6,11,10.4],"inp":[94.1,4,1.9],"cls":[12.6,75.2,12.2],"fcp":[67.5,19.1,13.4],"ttfb":[70,19.5,10.5]},"parts":{"ttfb":1002,"delay":318,"dur":365,"render":527},"lcp_image":91.3,"nav":null},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c6":{"label":"ثامن تجارت","origin":"https://samentejarat.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2213,"inp":146,"cls":0,"fcp":2145,"ttfb":1340,"rtt":285},"dist":{"lcp":[80.7,12.5,6.8],"inp":[82.5,12.9,4.6],"cls":[99,0.8,0.2],"fcp":[62.7,25.8,11.5],"ttfb":[59.6,26.9,13.5]},"parts":{"ttfb":1281,"delay":62,"dur":95,"render":977},"lcp_image":55.4,"nav":{"navigate":83.7,"navigate_cache":7.7,"reload":5.3,"restore":0,"back_forward":0.6,"back_forward_cache":2.7,"prerender":0},"lab":{"score":87,"fp":1449,"dcl":2512,"onload":3703,"viewport_ok":null,"opps":[{"t":"Improve image delivery","ms":700},{"t":"Reduce unused JavaScript","ms":140}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":1818,"inp":47,"cls":0,"fcp":1704,"ttfb":1244,"rtt":209},"dist":{"lcp":[85.5,6.5,8],"inp":[96.6,2,1.4],"cls":[95.2,3.9,0.9],"fcp":[79,12.9,8.1],"ttfb":[55.5,29.8,14.7]},"parts":{"ttfb":1422,"delay":68,"dur":128,"render":534},"lcp_image":64.8,"nav":null,"lab":{"score":95,"fp":1432,"dcl":2218,"onload":2458,"viewport_ok":null,"opps":[]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c7":{"label":"اوآهن","origin":"https://oahan.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":3663,"inp":172,"cls":0,"fcp":3326,"ttfb":2535,"rtt":294},"dist":{"lcp":[56.6,23,20.4],"inp":[79.2,14.3,6.5],"cls":[98.4,0.8,0.8],"fcp":[44.8,25,30.2],"ttfb":[12.5,53.3,34.2]},"parts":{},"lcp_image":null,"nav":null,"lab":{"score":68,"fp":4973,"dcl":5197,"onload":6357,"viewport_ok":null,"opps":[{"t":"Use efficient cache lifetimes","ms":850},{"t":"Reduce unused CSS","ms":590},{"t":"Reduce unused JavaScript","ms":450}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2425,"inp":59,"cls":0.07,"fcp":2018,"ttfb":1289,"rtt":308},"dist":{"lcp":[75.8,11.3,12.9],"inp":[95.8,2.4,1.8],"cls":[86.5,8.7,4.8],"fcp":[70.7,14.9,14.4],"ttfb":[44.7,38.8,16.5]},"parts":{},"lcp_image":null,"nav":null,"lab":{"score":82,"fp":5790,"dcl":6550,"onload":7519,"viewport_ok":null,"opps":[{"t":"Use efficient cache lifetimes","ms":800},{"t":"Reduce unused JavaScript","ms":240}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c8":{"label":"گروه کانکا","origin":"https://kankagroup.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2721,"inp":111,"cls":0.06,"fcp":2570,"ttfb":2103,"rtt":288},"dist":{"lcp":[71.8,17.2,11],"inp":[91.4,7,1.6],"cls":[90.2,7.6,2.2],"fcp":[62.8,17,20.2],"ttfb":[48.4,22.8,28.8]},"parts":{},"lcp_image":null,"nav":null,"lab":{"score":67,"fp":1599,"dcl":2368,"onload":2599,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":1300},{"t":"Improve image delivery","ms":1050},{"t":"Use efficient cache lifetimes","ms":150}]}},"desktop":{"ok":false,"reason":"ترافیک کافی برای CrUX ندارد","lab":{"score":62,"fp":2132,"dcl":3220,"onload":3222,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":180},{"t":"Improve image delivery","ms":100}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c9":{"label":"آهن پرایس","origin":"https://ahanprice.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":3477,"inp":296,"cls":0,"fcp":3329,"ttfb":1270,"rtt":276},"dist":{"lcp":[58.8,21.6,19.6],"inp":[59.3,28.8,11.9],"cls":[95.8,1.6,2.6],"fcp":[41.5,29,29.5],"ttfb":[58.3,25,16.7]},"parts":{"ttfb":1212,"delay":307,"dur":289,"render":1344},"lcp_image":98.2,"nav":{"navigate":86.8,"navigate_cache":0,"reload":10.5,"restore":0,"back_forward":1.2,"back_forward_cache":0.2,"prerender":1.3},"lab":{"score":52,"fp":4622,"dcl":4645,"onload":5148,"viewport_ok":null,"opps":[{"t":"Reduce unused CSS","ms":1950},{"t":"Reduce unused JavaScript","ms":450}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2896,"inp":80,"cls":0.02,"fcp":2566,"ttfb":1162,"rtt":235},"dist":{"lcp":[68.3,16.9,14.8],"inp":[92.4,5.1,2.5],"cls":[86.5,2.6,10.9],"fcp":[58.4,21.6,20],"ttfb":[63.4,22.9,13.7]},"parts":{"ttfb":1168,"delay":949,"dur":194,"render":509},"lcp_image":84.1,"nav":null,"lab":{"score":68,"fp":2411,"dcl":3249,"onload":5359,"viewport_ok":null,"opps":[{"t":"Reduce unused CSS","ms":290}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}},"c10":{"label":"آیرومارت","origin":"https://iromart.com","phone":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2283,"inp":152,"cls":0.01,"fcp":2228,"ttfb":1118,"rtt":290},"dist":{"lcp":[78.2,10.9,10.9],"inp":[83.1,12.9,4],"cls":[93.1,2.7,4.2],"fcp":[65.6,18.3,16.1],"ttfb":[64.6,23.9,11.5]},"parts":{"ttfb":1106,"delay":174,"dur":637,"render":345},"lcp_image":95.2,"nav":{"navigate":86.7,"navigate_cache":7,"reload":4.3,"restore":0,"back_forward":0.6,"back_forward_cache":1.5,"prerender":0},"lab":{"score":65,"fp":2221,"dcl":2671,"onload":4924,"viewport_ok":null,"opps":[{"t":"Reduce unused JavaScript","ms":990},{"t":"Improve image delivery","ms":600},{"t":"Reduce unused CSS","ms":150}]}},"desktop":{"ok":true,"period":{"first":"2026-10-25","last":"2026-11-21"},"p75":{"lcp":2324,"inp":47,"cls":0.01,"fcp":2120,"ttfb":1237,"rtt":241},"dist":{"lcp":[77.1,10.5,12.4],"inp":[97.7,1.2,1.1],"cls":[95.1,2.6,2.3],"fcp":[69.8,14.5,15.7],"ttfb":[58.7,23.5,17.8]},"parts":{"ttfb":1363,"delay":101,"dur":622,"render":326},"lcp_image":null,"nav":null,"lab":{"score":66,"fp":2330,"dcl":2915,"onload":4171,"viewport_ok":null,"opps":[{"t":"Improve image delivery","ms":4350},{"t":"Reduce unused JavaScript","ms":200}]}},"extra":{"idx":null,"https":"yes","mobile_friendly":null,"schema":null}}},"key_urls":{"https://steelrokh.com/":{"phone":{"ok":false,"reason":"ترافیک کافی برای CrUX ندارد"},"desktop":{"ok":false,"reason":"ترافیک کافی برای CrUX ندارد"}}}},"crawl":{"meta":{"is_sample":true,"site":"steelrokh.com","source":"Screaming Frog SEO Spider","crawl_date":"1405-07-30","generated_at":"2026-11-15T20:01:04+00:00","notes":["کراول قبلی در دست نیست، پس ستون اختلاف با ماه قبل خالی است."]},"overview":{"total_urls":612,"indexable":340,"non_indexable":272,"avg_response_ms":820,"status":{"2xx":545,"3xx":38,"4xx":27,"5xx":2},"index":{"indexable":340,"canonicalised":118,"noindex":96,"other":58},"depth":{"1":14,"2":96,"3":180,"4":210,"5_plus":112}},"issues":[{"name":"Internal Client Error (4xx)","fa":"لینک داخلی به صفحهٔ ۴۰۴","guide":"لینک‌ها را اصلاح یا به صفحهٔ معادل ریدایرکت کنید.","type":"Issue","priority":"High","level":"critical","urls":27,"percent":4.4,"delta":null},{"name":"Canonicalised to Non-Indexable","fa":"Canonical به صفحهٔ غیرقابل ایندکس","guide":"Canonical باید به نسخهٔ ۲۰۰ و قابل ایندکس اشاره کند.","type":"Issue","priority":"High","level":"critical","urls":3,"percent":0.5,"delta":null},{"name":"Page Titles: Missing","fa":"صفحهٔ بدون عنوان","guide":"","type":"Issue","priority":"High","level":"critical","urls":4,"percent":0.7,"delta":null},{"name":"Images: Missing Alt Text","fa":"تصویر بدون متن جایگزین (alt)","guide":"","type":"Warning","priority":"Low","level":"warning","urls":214,"percent":35,"delta":null},{"name":"Meta Description: Missing","fa":"متادیسکریپشن خالی","guide":"با مهارت متای Rank Math قابل رفع است.","type":"Warning","priority":"Medium","level":"warning","urls":58,"percent":9.5,"delta":null},{"name":"Page Titles: Duplicate","fa":"عنوان تکراری","guide":"","type":"Warning","priority":"Medium","level":"warning","urls":46,"percent":7.5,"delta":null},{"name":"Orphan URLs","fa":"صفحهٔ یتیم (بدون لینک داخلی)","guide":"از صفحات دستهٔ مرتبط به آن‌ها لینک بدهید.","type":"Warning","priority":"Medium","level":"warning","urls":18,"percent":2.9,"delta":null},{"name":"Images: Over 100 KB","fa":"تصویر بزرگ‌تر از ۱۰۰ کیلوبایت","guide":"تصاویر را به WebP تبدیل و فشرده کنید؛ روی LCP اثر دارد.","type":"Opportunity","priority":"Medium","level":"opportunity","urls":96,"percent":15.7,"delta":null}],"levels":{"critical":34,"warning":336,"opportunity":96},"history":[{"date":"1405-07-30","critical":34,"warning":336,"opportunity":96,"total_urls":612,"issues":8}]},"competitors":{"meta":{"is_sample":true,"source":"Screaming Frog Mode > Compare","date":"1405-08-02","generated_at":"2026-11-15T20:01:04+00:00","unmatched":[],"notes":[]},"competitors":{"c1":{"counts":{"new_page":1,"title_changed":1},"changes":[{"type":"new_page","url":"/stainless-sheet-price-calculator","old":"","new":"ماشین‌حساب قیمت ورق استیل","date":"1405-08-02","days":22,"title":"صفحهٔ «ماشین‌حساب قیمت ورق استیل» منتشر شد","act":"مستقیم با ابزار محاسبهٔ وزن ما رقابت می‌کند. ابزار را به قیمت روز وصل کنید و از همهٔ صفحات ورق به آن لینک داخلی بدهید.","impact":"high"},{"type":"title_changed","url":"/stainless-pipe","old":"قیمت لوله استیل","new":"قیمت لوله استیل امروز + جدول وزن","date":"1405-07-30","days":24,"title":"عنوان صفحهٔ لوله به «قیمت لوله استیل امروز + جدول وزن» تغییر کرد","act":"روی «قیمت لوله استیل» رتبه ۸ هستیم. جدول وزن و تاریخ به‌روزرسانی را به صفحهٔ دستهٔ لوله اضافه کنید.","impact":"med"}],"counts_source":"rows","name":"آهن آنلاین"},"c4":{"counts":{"removed_page":1},"changes":[{"type":"removed_page","url":"/coil-stainless","old":"","new":"","date":"1405-07-25","days":29,"title":"صفحهٔ «کویل استیل» حذف شد و خطای ۴۰۴ می‌دهد","act":"فرصت تصاحب «کویل استیل» با ۲٬۱۰۰ جستجوی ماهانه. یک صفحهٔ دسته برای کویل بسازید.","impact":"med"}],"counts_source":"rows","name":"پولاد"},"c2":{"counts":{"schema_added":1},"changes":[{"type":"schema_added","url":"/product/*","old":"","new":"Product + FAQ","date":"1405-07-26","days":28,"title":"اسکیمای Product و FAQ به صفحات محصول اضافه شد","act":"ما هنوز Schema نداریم. این اولویت اول فنی ماست.","impact":"high"}],"counts_source":"rows","name":"ایران استیل آنلاین"}},"history":[{"date":"1405-08-02","changes":4,"per":{"c1":2,"c4":1,"c2":1}}]}}</script>
+<script>
+/* =================== DATA (sample — replace with real exports) =================== */
+const ACTORS=[
+  {id:'us',name:'استیل رخ',color:'var(--us)'},
+  {id:'c1',name:'آهن آنلاین',color:'var(--c1)'},
+  {id:'c2',name:'ایران استیل آنلاین',color:'var(--c2)'},
+  {id:'c3',name:'تجارت آلیاژ',color:'var(--c3)'},
+  {id:'c4',name:'پولاد',color:'var(--c4)'},
+  {id:'c5',name:'فولاد ایرانیان',color:'#6f8fa6'},
+  {id:'c6',name:'ثامن تجارت',color:'#a67f6f'},
+  {id:'c7',name:'اوآهن',color:'#6fa686'},
+  {id:'c8',name:'گروه کانکا',color:'#a66f9b'},
+  {id:'c9',name:'آهن پرایس',color:'#8f8f5e'},
+  {id:'c10',name:'آیرومارت',color:'#5e9b8f'},
+];
+const COMP=ACTORS.slice(1);
+
+/* شاخص‌های فنی (CrUX) برای هر یازده سایت خودکار گرفته می‌شود، ولی رتبه و بک‌لینک و
+   پوشش خوشه‌ها تا فاز ۴ (DataForSEO) فقط برای بعضی سایت‌ها داده دارند.
+   WITH مشخص می‌کند هر ماژول چه کسی را نشان دهد، تا جای سایت بی‌داده صفر ننشیند. */
+const WITH=obj=>ACTORS.filter(a=>obj[a.id]);
+const MONTHS=['اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر'];
+
+const rankings=[
+  {kw:'قیمت ورق استیل',vol:8100,us:4,c:[1,2,7,15],intent:'transactional',prev:6},
+  {kw:'خرید ورق استیل ضدزنگ',vol:2400,us:6,c:[2,1,9,12],intent:'transactional',prev:5},
+  {kw:'قیمت لوله استیل',vol:5400,us:8,c:[3,1,5,18],intent:'transactional',prev:11},
+  {kw:'فروش اتصالات استیل',vol:1300,us:3,c:[5,2,11,8],intent:'transactional',prev:3},
+  {kw:'قیمت میلگرد استیل',vol:1600,us:12,c:[1,4,6,20],intent:'transactional',prev:9},
+  {kw:'انواع ورق استیل',vol:3600,us:2,c:[4,1,8,14],intent:'commercial',prev:4},
+  {kw:'تفاوت استیل ۳۰۴ و ۳۱۶',vol:2900,us:1,c:[3,5,2,9],intent:'commercial',prev:2},
+  {kw:'گرید استیل ضدزنگ',vol:1900,us:5,c:[2,3,1,11],intent:'commercial',prev:5},
+  {kw:'بهترین استیل برای صنایع غذایی',vol:880,us:7,c:[1,4,3,16],intent:'commercial',prev:10},
+  {kw:'استیل داپلکس چیست',vol:590,us:3,c:[8,2,1,25],intent:'commercial',prev:3},
+  {kw:'استیل ضدزنگ چیست',vol:6600,us:2,c:[1,4,3,6],intent:'informational',prev:2},
+  {kw:'کاربرد فولاد ضدزنگ',vol:1100,us:4,c:[2,6,1,10],intent:'informational',prev:4},
+  {kw:'محاسبه وزن ورق استیل',vol:1400,us:1,c:[6,3,9,22],intent:'informational',prev:3},
+  {kw:'خواص فولاد ضدزنگ',vol:720,us:6,c:[3,1,2,13],intent:'informational',prev:6},
+  {kw:'تفاوت استیل و فولاد',vol:2200,us:9,c:[2,1,4,7],intent:'informational',prev:7},
+];
+const avgRankHist={us:[8.1,7.4,6.6,6.0,5.3,4.9],c1:[3.4,3.2,3.1,3.0,3.0,2.9],c2:[3.5,3.3,3.0,2.9,2.8,2.7],c3:[5.6,5.4,5.1,5.0,4.9,4.8],c4:[12.9,13.2,13.0,13.5,13.6,13.7]};
+const sovFactors={us:[.68,.76,.84,.9,.95,1],c1:[1.05,1.04,1.03,1.02,1.01,1],c2:[1.06,1.05,1.03,1.02,1,1],c3:[1.02,1.01,1.01,1,1,1],c4:[1.1,1.08,1.05,1.03,1.01,1]};
+
+const backlinks={us:{rd:142,tb:1850,dr:28,df:72},c1:{rd:380,tb:6200,dr:45,df:68},c2:{rd:310,tb:4900,dr:41,df:74},c3:{rd:520,tb:9100,dr:52,df:65},c4:{rd:95,tb:1200,dr:22,df:80}};
+const rdHist={us:[96,104,113,121,131,142],c1:[330,341,352,360,371,380],c2:[270,279,288,296,302,310],c3:[430,448,466,484,503,520],c4:[88,90,91,93,94,95]};
+const intersect=[
+  {site:'رسانه خبری اقتصادی',type:'رپورتاژ',dr:58,has:['c1','c3']},
+  {site:'مجله تخصصی ساختمان',type:'مقاله مهمان',dr:44,has:['c1','c2','c3']},
+  {site:'دایرکتوری مشاغل صنعتی',type:'دایرکتوری',dr:39,has:['c1','c2']},
+  {site:'سایت مقایسه قیمت مصالح',type:'لیستینگ قیمت',dr:36,has:['c1','c2','c4']},
+  {site:'انجمن تخصصی جوش و برش',type:'انجمن',dr:31,has:['c2','c3']},
+  {site:'وبلاگ مهندسی مواد',type:'منبع آموزشی',dr:27,has:['c3','c4']},
+];
+
+const keywordGap=[
+  {kw:'لوله مانیسمان استیل',vol:1900,kd:32,bc:'c2',cr:2,op:'quick'},
+  {kw:'ورق استیل بگیر',vol:720,kd:18,bc:'c1',cr:3,op:'quick'},
+  {kw:'استیل نگیر چیست',vol:1300,kd:24,bc:'c3',cr:1,op:'quick'},
+  {kw:'قیمت روز استیل',vol:4400,kd:55,bc:'c1',cr:1,op:'med'},
+  {kw:'نبشی استیل',vol:880,kd:28,bc:'c2',cr:4,op:'quick'},
+  {kw:'ورق استیل طرح هرمس',vol:590,kd:21,bc:'c4',cr:2,op:'quick'},
+  {kw:'فلنج استیل',vol:1100,kd:38,bc:'c2',cr:1,op:'med'},
+  {kw:'استیل بهداشتی',vol:1600,kd:42,bc:'c3',cr:2,op:'med'},
+  {kw:'ورق استیل مات',vol:480,kd:15,bc:'c1',cr:5,op:'quick'},
+  {kw:'کویل استیل',vol:2100,kd:48,bc:'c1',cr:1,op:'long'},
+  {kw:'تسمه استیل',vol:650,kd:26,bc:'c2',cr:3,op:'quick'},
+  {kw:'استیل آلیاژی چیست',vol:990,kd:35,bc:'c3',cr:1,op:'med'},
+];
+
+const technical={
+  us:{idx:340,mob:true,schema:false,https:true},
+  c1:{idx:1250,mob:true,schema:true,https:true},
+  c2:{idx:890,mob:true,schema:true,https:true},
+  c3:{idx:2100,mob:true,schema:true,https:true},
+  c4:{idx:210,mob:false,schema:false,https:true},
+};
+const idxHist=[250,268,289,305,322,340];
+/* CrUX p75, phone (ms; cls unitless). Desktop derived for the sample. */
+const CRUX={
+  us:{lcp:3200,inp:240,cls:.08,fcp:2100,ttfb:900,fp:1950,dcl:2700,onload:5200,rtt:190},
+  c1:{lcp:4100,inp:310,cls:.15,fcp:2600,ttfb:1300,fp:2400,dcl:3400,onload:6900,rtt:210},
+  c2:{lcp:2300,inp:170,cls:.05,fcp:1500,ttfb:620,fp:1400,dcl:2000,onload:3900,rtt:180},
+  c3:{lcp:3600,inp:220,cls:.12,fcp:2300,ttfb:1000,fp:2150,dcl:3000,onload:6100,rtt:200},
+  c4:{lcp:5300,inp:420,cls:.22,fcp:3300,ttfb:1700,fp:3100,dcl:4300,onload:8800,rtt:230},
+};
+const lcpImg={us:82,c1:76,c2:64,c3:70,c4:88};
+const navTypes={
+  us:{navigate:74,bfcache:8,back_forward:7,reload:9,prerender:2},
+  c1:{navigate:70,bfcache:14,back_forward:5,reload:8,prerender:3},
+  c2:{navigate:68,bfcache:18,back_forward:3,reload:6,prerender:5},
+  c3:{navigate:76,bfcache:6,back_forward:9,reload:8,prerender:1},
+  c4:{navigate:78,bfcache:2,back_forward:10,reload:10,prerender:0},
+};
+const TH={
+  lcp:{n:'LCP',fa:'بزرگ‌ترین رنگ‌آمیزی محتوا',g:2500,p:4000},
+  inp:{n:'INP',fa:'تعامل تا رنگ‌آمیزی بعدی',g:200,p:500},
+  cls:{n:'CLS',fa:'جابه‌جایی چیدمان',g:.1,p:.25},
+  fcp:{n:'FCP',fa:'اولین رنگ‌آمیزی محتوا',g:1800,p:3000},
+  ttfb:{n:'TTFB',fa:'زمان رسیدن اولین بایت',g:800,p:1800},
+};
+const TIPS={lcp:'تصویر بالای صفحه را فشرده و preload کنید.',inp:'اسکریپت‌های سنگین و افزونه‌های اضافی را کم کنید.',cls:'برای تصاویر و بنرها ابعاد ثابت بگذارید.',fcp:'CSS حیاتی را inline و فونت‌ها را بهینه کنید.',ttfb:'کش سمت سرور و CDN را فعال کنید.'};
+const mCls=(k,v)=>v<=TH[k].g?'t':v<=TH[k].p?'m':'l';
+const fmtM=(k,v)=>k==='cls'?fad(v,2):`<span dir="ltr">${v>=1000?fad(v/1000,1)+' s':fa(Math.round(v))+' ms'}</span>`;
+
+/* ============ ماژول سلامت فنی: دادهٔ CrUX و PageSpeed (فاز ۲) ============
+   دادهٔ واقعی را اسکریپت scripts/crux_pagespeed.py در ریپوی steelrokh-seo می‌سازد.
+   تازه‌سازی: محتوای data/dashboard-tech.js را عیناً جای خط TECH_REAL زیر بگذار. */
+
+/* ===== TECH:BEGIN ===== */
+const TECH_REAL=null;
+/* ===== TECH:END ===== */
+
+/* تا وقتی دادهٔ واقعی نیامده، از همان اعداد نمونهٔ بالا یک ساختار همشکل می‌سازیم تا
+   ماژول فقط یک مسیر خواندن داشته باشد. در این حالت توزیع‌ها و اجزای LCP تخمینی‌اند؛
+   با آمدن دادهٔ واقعی جای خود را به مقدارهای واقعی CrUX می‌دهند. */
+function sampleTech(){
+  const dEst=(k,v)=>{const t=TH[k],r=v/t.g;const g=Math.round(Math.max(20,Math.min(96,75+(1-r)*60)));const p=Math.round(Math.max(2,Math.min(50,(v/t.p-.6)*40)));return [g,100-g-p,p];};
+  const scale=(b,ff)=>{if(ff==='phone')return {...b};const s={...b};
+    ['lcp','fcp','ttfb','fp','dcl','onload'].forEach(k=>s[k]=Math.round(b[k]*.55));
+    s.inp=Math.round(b.inp*.45);s.cls=+(b.cls*.8).toFixed(2);s.rtt=Math.round(b.rtt*.6);return s;};
+  const blk=(id,ff)=>{const v=scale(CRUX[id],ff),rest=v.lcp-v.ttfb,n=navTypes[id];
+    return {ok:true,period:{first:'2026-10-12',last:'2026-11-08'},
+      p75:{lcp:v.lcp,inp:v.inp,cls:v.cls,fcp:v.fcp,ttfb:v.ttfb,rtt:v.rtt},
+      dist:Object.fromEntries(['lcp','inp','cls','fcp','ttfb'].map(k=>[k,dEst(k,v[k])])),
+      parts:{ttfb:v.ttfb,delay:Math.round(rest*.3),dur:Math.round(rest*.45),render:Math.round(rest*.25)},
+      lcp_image:lcpImg[id],
+      nav:{navigate:Math.max(0,n.navigate-20),navigate_cache:20,reload:n.reload,restore:.4,back_forward:n.back_forward,back_forward_cache:n.bfcache,prerender:n.prerender},
+      lab:{score:null,fp:v.fp,dcl:v.dcl,onload:v.onload,opps:[]}};};
+  return {meta:{generated:null,is_sample:true,source_field:'نمونهٔ فرضی',source_lab:'نمونهٔ فرضی',period:{first:'2026-10-12',last:'2026-11-08'},notes:[]},
+    sites:Object.fromEntries(ACTORS.filter(a=>CRUX[a.id]).map(a=>[a.id,{label:a.name,origin:null,
+      phone:blk(a.id,'phone'),desktop:blk(a.id,'desktop'),
+      extra:{idx:technical[a.id].idx,https:technical[a.id].https?'yes':'no',mobile_friendly:technical[a.id].mob?'yes':'no',schema:technical[a.id].schema?'yes':'no'}}])),
+    key_urls:{}};
+}
+let TECH=TECH_REAL||sampleTech();
+
+/* تنها مسیر خواندن دادهٔ فنی در داشبرد */
+const TF=(id,ff)=>{const b=(TECH.sites[id]||{})[ff];return (b&&b.ok)?b:null;};
+const TLAB=(id,ff)=>((TECH.sites[id]||{})[ff]||{}).lab||null;
+const TEX=id=>(TECH.sites[id]||{}).extra||{};
+
+/* با آمدن دادهٔ واقعی، تعداد ایندکس و وضعیت فنی از config/manual-overrides.json می‌آید */
+function applyRealExtras(){ACTORS.forEach(a=>{const e=TEX(a.id);if(!e)return;
+  technical[a.id]={idx:e.idx||0,mob:e.mobile_friendly==='yes',schema:e.schema==='yes',https:e.https!=='no'};});}
+if(TECH_REAL)applyRealExtras();
+
+/* سهم بازدیدهای «خوب» در سه شاخص اصلی — از توزیع واقعی، نه از صدک ۷۵ */
+const cwvGood=id=>{const b=TF(id,'phone');if(!b)return 0;
+  const ks=['lcp','inp','cls'].filter(k=>b.dist[k]);if(!ks.length)return 0;
+  return ks.reduce((s,k)=>s+b.dist[k][0],0)/(ks.length*100);};
+/* هر سه شاخص اصلی در محدودهٔ خوب؟ true / false / null اگر داده ناقص باشد */
+const cwvPass=(id,ff)=>{const b=TF(id,ff);if(!b)return null;
+  const ks=['lcp','inp','cls'].filter(k=>b.p75[k]!=null);if(ks.length<3)return null;
+  return ks.every(k=>b.p75[k]<=TH[k].g);};
+
+const clusters=[
+  {n:'ورق و کویل',p:[18,42,30,25,9]},
+  {n:'لوله و اتصالات',p:[12,35,48,20,14]},
+  {n:'میلگرد و پروفیل',p:[4,22,15,10,6]},
+  {n:'گریدها و آلیاژها',p:[22,14,18,40,3]},
+  {n:'قیمت و بازار',p:[3,28,16,8,5]},
+  {n:'محاسبات و ابزارها',p:[6,4,2,3,0]},
+  {n:'کاربردهای صنعتی',p:[9,10,12,31,2]},
+];
+
+const EVTYPES={
+  page:{l:'صفحه جدید',c:'var(--accent)',g:'صفحه'},
+  post:{l:'مقاله جدید',c:'var(--c2)',g:'مقاله'},
+  meta:{l:'تغییر عنوان و متا',c:'var(--c1)',g:'متا'},
+  title:{l:'تغییر عنوان',c:'var(--c1)',g:'عنوان'},
+  h1:{l:'تغییر H1',c:'var(--c2)',g:'H1'},
+  link:{l:'بک‌لینک جدید',c:'var(--c3)',g:'لینک'},
+  schema:{l:'تغییر فنی',c:'var(--good)',g:'فنی'},
+  gone:{l:'حذف صفحه',c:'var(--crit)',g:'حذف'},
+  price:{l:'تغییر قیمت‌گذاری',c:'var(--warn)',g:'قیمت'},
+  cat:{l:'دسته‌بندی جدید',c:'var(--accent)',g:'دسته'},
+};
+/* ---- نمونهٔ داخلی رادار؛ تا competitors.json نیاید همین نشان داده می‌شود ---- */
+const SAMPLE_EVENTS=[
+  {who:'c1',type:'page',date:'۲ آبان',days:1,impact:'high',t:'صفحهٔ «ماشین‌حساب قیمت ورق استیل» منتشر شد',url:'/stainless-sheet-price-calculator',act:'مستقیم با ابزار محاسبه وزن ما رقابت می‌کند. ابزار را به قیمت روز وصل کنید و از همهٔ صفحات ورق به آن لینک داخلی بدهید.'},
+  {who:'c2',type:'post',date:'۱ آبان',days:2,impact:'med',t:'مقاله «مقایسه داپلکس ۲۲۰۵ و ۳۱۶» منتشر شد',url:'/blog/duplex-2205-vs-316',act:'مقالهٔ «استیل داپلکس چیست» را با یک بخش مقایسه‌ای و جدول خواص به‌روز کنید.'},
+  {who:'c1',type:'meta',date:'۳۰ مهر',days:4,impact:'med',t:'عنوان صفحهٔ لوله به «قیمت لوله استیل امروز + جدول وزن» تغییر کرد',url:'/stainless-pipe',act:'روی «قیمت لوله استیل» رتبه ۸ هستیم. جدول وزن و تاریخ به‌روزرسانی را به صفحهٔ دستهٔ لوله اضافه کنید.'},
+  {who:'c3',type:'link',date:'۲۸ مهر',days:6,impact:'high',t:'۱۲ دامنهٔ ارجاع‌دهندهٔ جدید از رپورتاژ در سایت‌های خبری اقتصادی',url:'',act:'کمپین رپورتاژ فعال دارد. رسانه‌های مشترک را در ماژول بک‌لینک ببینید و برای همان رسانه‌ها رپورتاژ برنامه‌ریزی کنید.'},
+  {who:'c2',type:'schema',date:'۲۶ مهر',days:8,impact:'high',t:'اسکیمای Product و FAQ به صفحات محصول اضافه شد',url:'/product/*',act:'ما هنوز Schema نداریم. این اولویت اول فنی ماست.'},
+  {who:'c4',type:'gone',date:'۲۵ مهر',days:9,impact:'med',t:'صفحهٔ «کویل استیل» حذف شد و خطای ۴۰۴ می‌دهد',url:'/coil-stainless',act:'فرصت تصاحب «کویل استیل» با ۲٬۱۰۰ جستجوی ماهانه. یک صفحهٔ دسته برای کویل بسازید.'},
+  {who:'c1',type:'cat',date:'۲۲ مهر',days:12,impact:'med',t:'دستهٔ «فلنج استیل» با ۱۴ محصول اضافه شد',url:'/product-category/stainless-flange',act:'«فلنج استیل» در کیوورد گپ ماست. صفحهٔ دسته و یک مقالهٔ راهنما برایش برنامه‌ریزی کنید.'},
+  {who:'c3',type:'post',date:'۲۰ مهر',days:14,impact:'low',t:'۴ مقالهٔ جدید در خوشهٔ «کاربردهای صنعتی»',url:'/blog/category/applications',act:'در این خوشه ۹ صفحه در برابر ۳۱ صفحهٔ رقیب داریم. تقویم محتوای این خوشه را بازبینی کنید.'},
+  {who:'c2',type:'price',date:'۱۸ مهر',days:16,impact:'med',t:'جدول قیمت ورق ۳۰۴ حالا روزانه و با تاریخ به‌روز می‌شود',url:'/price/sheet-304',act:'صفحهٔ قیمت ما تاریخ به‌روزرسانی ندارد. تاریخ و بازهٔ نوسان را نمایش دهید.'},
+  {who:'c1',type:'link',date:'۱۵ مهر',days:19,impact:'low',t:'۵ لینک از دایرکتوری‌های صنعتی',url:'',act:'ثبت در همان دایرکتوری‌ها کم‌هزینه است. فهرستشان در بخش لینک‌های مشترک آمده است.'},
+  {who:'c4',type:'schema',date:'۱۲ مهر',days:22,impact:'low',t:'LCP صفحهٔ اصلی از ۶٫۱ به ۵٫۳ ثانیه رسید',url:'/',act:'اقدامی لازم نیست؛ هنوز از ما کندتر است.'},
+  {who:'c2',type:'page',date:'۸ مهر',days:26,impact:'med',t:'لندینگ «لوله مانیسمان استیل» منتشر شد',url:'/seamless-stainless-pipe',act:'این کلمه Quick-win کیوورد گپ ماست (سختی ۳۲). صفحهٔ اختصاصی بسازید.'},
+];
+const SAMPLE_WEEKLY={c1:[2,1,3,2,4,3],c2:[1,2,2,3,2,4],c3:[3,2,1,2,3,2],c4:[0,1,0,1,1,1]};
+let events=SAMPLE_EVENTS,weekly=SAMPLE_WEEKLY;
+let RMETA={is_sample:true,source:'نمونهٔ داخلی داشبرد',date:'',notes:[],rows:{}};
+
+/* competitors.json کنار همین صفحه، خروجی scripts/screaming_frog.py از Mode > Compare.
+   عنوان فارسی و اقدام پیشنهادی هر تغییر دستی نوشته می‌شود (فایل notes.json)؛
+   تغییری که اقدام ندارد، بدون اقدام نمایش داده می‌شود، نه با جملهٔ ساختگی. */
+function applyCompetitorsJson(j){
+  if(!j||!j.competitors||!Object.keys(j.competitors).length)return false;
+  const m=j.meta||{};
+  const T={new_page:'page',removed_page:'gone',title_changed:'title',meta_changed:'meta',h1_changed:'h1',schema_added:'schema'};
+  const ev=[],comp={},rows={};
+  Object.keys(j.competitors).forEach(cid=>{
+    const c=j.competitors[cid]||{},k=c.counts||{},ch=Array.isArray(c.changes)?c.changes:[];
+    comp[cid]={added:k.new_page||0,removed:k.removed_page||0,title:k.title_changed||0,meta:k.meta_changed||0,
+      h1:k.h1_changed||0,schema:k.schema_added||0,src:c.counts_source==='compare_overview'?'overview':'rows'};
+    rows[cid]=ch.length;
+    ch.forEach(x=>{
+      ev.push({who:cid,type:T[x.type]||'page',date:shortDate(x.date),
+        days:(typeof x.days==='number'?x.days:999),impact:x.impact==='high'?'high':(x.impact||''),
+        t:esc(x.title||'تغییر ثبت‌شده'),url:esc(x.url||''),act:esc(x.act||''),
+        old:esc(x.old||''),nw:esc(x.new||'')});
+    });
+  });
+  ev.sort((a,b)=>a.days-b.days);
+  events=ev;sfCompare=comp;weekly={};
+  RMETA={is_sample:!!m.is_sample,source:esc(m.source||'Screaming Frog Compare'),date:esc(m.date||''),
+    notes:(Array.isArray(m.notes)?m.notes:[]).map(esc),rows:rows};
+  return true;
+}
+
+/* =================== HELPERS =================== */
+const toFa=s=>String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const fa=n=>Number(n).toLocaleString('fa-IR');
+const fad=(n,d=1)=>toFa(Number(n).toFixed(d)).replace('.','٫');
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* تاریخ از فایل دیتا می‌آید (۱۴۰۵-۰۷-۳۰ یا ۲۰۲۶-۱۰-۲۲): سال را برای برچسب نمودار می‌اندازیم */
+const shortDate=s=>s?toFa(String(s).replace(/^\d{4}[-/]/,'').replace(/-/g,'/')):'';
+const faSlash=s=>s?toFa(String(s).replace(/-/g,'/')):'؟';
+const A=id=>ACTORS.find(a=>a.id===id);
+const rankOf=(r,id)=>id==='us'?r.us:r.c[+id.slice(1)-1];
+const rkCls=r=>!r||r>=100?'x':r<=3?'t':r<=10?'m':'l';
+const rk=(r,us)=>`<span class="rk ${rkCls(r)}${us?' us':''}">${!r||r>=100?'—':fa(r)}</span>`;
+const IMPACT={high:['c','اثر بالا'],med:['w','اثر متوسط'],low:['n','اثر کم']};
+const OPP={quick:['g','Quick-win'],med:['w','متوسط'],long:['n','بلندمدت']};
+
+const CTR=r=>{if(!r||r>=100)return 0;const t=[0,.32,.25,.18,.13,.10,.08,.06,.05,.04,.03];return r<=10?t[r]:.015;};
+function sovNow(filter){
+  const rows=rankings.filter(r=>!filter||r.intent===filter);
+  const s=ACTORS.map(a=>rows.reduce((t,r)=>t+r.vol*CTR(rankOf(r,a.id)),0));
+  const tot=s.reduce((a,b)=>a+b,0)||1;
+  return Object.fromEntries(ACTORS.map((a,i)=>[a.id,s[i]/tot*100]));
+}
+const SOV=sovNow();
+const sovHist=Object.fromEntries(WITH(sovFactors).map(a=>[a.id,sovFactors[a.id].map(f=>SOV[a.id]*f)]));
+
+/* شاخص سلامت فقط برای سایت‌هایی معنا دارد که هر چهار ورودی‌اش را دارند.
+   سایتی که فقط دادهٔ فنی دارد امتیاز پایین نمی‌گیرد؛ از رده‌بندی بیرون می‌ماند تا فاز ۴. */
+function health(){
+  const rows=ACTORS.filter(a=>backlinks[a.id]&&avgRankHist[a.id]);
+  if(!rows.length)return [];
+  const maxSov=Math.max(...rows.map(a=>SOV[a.id]),1),maxDr=Math.max(...rows.map(a=>backlinks[a.id].dr),1);
+  return rows.map(a=>{const t=technical[a.id]||{};
+    const v=SOV[a.id]/maxSov*40+backlinks[a.id].dr/maxDr*25+cwvGood(a.id)*20+((t.schema?1:0)+(t.mob?1:0))/2*15;
+    return {id:a.id,score:Math.round(v)};}).sort((x,y)=>y.score-x.score);
+}
+let HEALTH=health();
+
+/* ---------- SVG charts ---------- */
+function spark(vals,color,invert){
+  const W=130,H=36,p=3,mn=Math.min(...vals),mx=Math.max(...vals),rg=(mx-mn)||1,n=vals.length;
+  const pts=vals.map((v,i)=>{const x=W-p-i*(W-2*p)/(n-1);let y=(v-mn)/rg;if(!invert)y=1-y;return [x,p+y*(H-2*p)];});
+  const d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+  const last=pts[pts.length-1];
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" style="width:130px" aria-hidden="true">
+    <path d="${d} L${last[0]} ${H} L${pts[0][0]} ${H} Z" fill="${color}" fill-opacity=".14"/>
+    <path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${last[0]}" cy="${last[1]}" r="3" fill="${color}"/></svg>`;
+}
+function niceTicks(mn,mx,n=5){const out=[];for(let i=0;i<n;i++)out.push(mn+(mx-mn)*i/(n-1));return out;}
+function lineChart({series,labels,invert=false,min,max,fmt=v=>fad(v,1),H=270}){
+  const W=700,pl=22,pr=46,pt=16,pb=34,n=labels.length;
+  const x=i=>W-pr-i*(W-pl-pr)/(n-1);
+  const y=v=>invert?pt+(v-min)/(max-min)*(H-pt-pb):H-pb-(v-min)/(max-min)*(H-pt-pb);
+  let g='';
+  niceTicks(min,max).forEach(t=>{g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line)" stroke-dasharray="3 4"/>
+    <text x="${W-pr+8}" y="${y(t)+4}" font-size="11" fill="var(--muted)" text-anchor="start">${fmt(t)}</text>`;});
+  labels.forEach((l,i)=>{g+=`<text x="${x(i)}" y="${H-10}" font-size="11" fill="var(--muted)" text-anchor="middle">${l}</text>`;});
+  let s='';
+  series.filter(se=>!se.hidden).forEach(se=>{
+    const pts=se.values.map((v,i)=>[x(i),y(v)]);
+    const d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+    if(se.bold){const base=invert?pt:H-pb;s+=`<path d="${d} L${pts[n-1][0]} ${base} L${pts[0][0]} ${base} Z" fill="${se.color}" fill-opacity=".1"/>`;}
+    s+=`<path d="${d}" fill="none" stroke="${se.color}" stroke-width="${se.bold?3:1.8}" stroke-linecap="round" stroke-linejoin="round" ${se.bold?'':'opacity=".85"'}/>`;
+    pts.forEach((q,i)=>{s+=`<circle cx="${q[0]}" cy="${q[1]}" r="${i===n-1?(se.bold?5:3.5):2.2}" fill="${i===n-1?se.color:'var(--surface)'}" stroke="${se.color}" stroke-width="1.6"><title>${se.name} · ${labels[i]}: ${fmt(se.values[i])}</title></circle>`;});
+    const lp=pts[n-1];
+    if(se.bold)s+=`<text x="${lp[0]-10}" y="${lp[1]-9}" font-size="12" font-weight="800" fill="${se.color}" text-anchor="end">${fmt(se.values[n-1])}</text>`;
+  });
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">${g}${s}</svg>`;
+}
+function legend(id,series){
+  return `<div class="legend" id="${id}">${series.map((s,i)=>`<button type="button" data-i="${i}" class="${s.hidden?'off':''}"><span class="sw" style="background:${s.color}"></span>${s.name}</button>`).join('')}</div>`;
+}
+function bindLegend(id,series,redraw){
+  document.querySelectorAll(`#${id} button`).forEach(b=>b.onclick=()=>{const s=series[+b.dataset.i];s.hidden=!s.hidden;redraw();});
+}
+function ring(pct,size=148,stroke=12,color='var(--accent)',track='rgba(255,255,255,.14)'){
+  const r=(size-stroke)/2,c=2*Math.PI*r,o=c*(1-pct/100);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true" style="transform:rotate(-90deg)">
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${o}"/></svg>`;
+}
+function radarChart(axes,sets){
+  const W=420,H=360,cx=210,cy=180,R=125,n=axes.length;
+  const pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*v/100,cy+Math.sin(a)*R*v/100];};
+  let g='';
+  [25,50,75,100].forEach(l=>{g+=`<polygon points="${axes.map((_,i)=>pt(i,l).join(',')).join(' ')}" fill="none" stroke="var(--line)"/>`;});
+  axes.forEach((ax,i)=>{const [x2,y2]=pt(i,100),[lx,ly]=pt(i,120);
+    g+=`<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--line)"/>
+    <text x="${lx}" y="${ly+4}" font-size="12" fill="var(--muted)" text-anchor="middle" font-weight="600">${ax}</text>`;});
+  sets.forEach(s=>{g+=`<polygon points="${s.v.map((v,i)=>pt(i,v).join(',')).join(' ')}" fill="${s.color}" fill-opacity="${s.bold?.22:.1}" stroke="${s.color}" stroke-width="${s.bold?2.6:1.8}"/>`;
+    s.v.forEach((v,i)=>{const [x,y]=pt(i,v);g+=`<circle cx="${x}" cy="${y}" r="3" fill="${s.color}"><title>${s.name} · ${axes[i]}: ${fa(Math.round(v))}</title></circle>`;});});
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" style="max-width:440px;margin:auto">${g}</svg>`;
+}
+
+/* =================== ICONS =================== */
+const ICO={
+  rankings:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  radar:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/>',
+  sov:'<path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/>',
+  gap:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5M8 11h6"/>',
+  backlinks:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  content:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-dasharray="3 2"/>',
+  crawl:'<path d="M9 7a3 3 0 0 1 6 0v1H9z"/><rect x="7" y="8" width="10" height="11" rx="5"/><path d="M12 12v7M3 13h4M17 13h4M4 7l3 3M20 7l-3 3M4 20l3-3M20 20l-3-3"/>',
+  technical:'<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/>',
+};
+const ico=k=>`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICO[k]}</svg>`;
+
+/* =================== MODULE REGISTRY =================== */
+const MODS=[
+  {id:'rankings',name:'رتبه کلمات کلیدی',desc:'رتبهٔ ما و رقبا روی کلمات هدف، روند میانگین رتبه در ۶ ماه اخیر، توزیع جایگاه‌ها و بیشترین صعود و نزول‌ها.'},
+  {id:'radar',name:'رادار رقبا',desc:'هر تغییری که رقبا روی سایتشان می‌دهند: صفحه و دستهٔ جدید، مقاله، تغییر عنوان و متا، بک‌لینک، تغییرات فنی و حذف صفحه، همراه با اقدام پیشنهادی برای ما.'},
+  {id:'sov',name:'سهم دیده‌شدن',desc:'Share of Voice: سهم هر سایت از کلیک‌های احتمالی روی کل کلمات هدف، بر اساس حجم جستجو و نرخ کلیک هر جایگاه.'},
+  {id:'gap',name:'کیوورد گپ',desc:'کلماتی که رقبا روی آن‌ها رتبه دارند و ما در ۱۰۰ نتیجهٔ اول نیستیم، روی نقشهٔ حجم در برابر سختی.'},
+  {id:'backlinks',name:'بک‌لینک گپ',desc:'قدرت پروفایل لینک ما و رقبا، رشد دامنه‌های ارجاع‌دهنده، و سایت‌هایی که به رقبا لینک داده‌اند ولی به ما نه.'},
+  {id:'content',name:'شکاف محتوایی',desc:'تعداد صفحات هر سایت در هر خوشهٔ موضوعی. خانه‌های کم‌رنگِ ردیف ما یعنی موضوعی که رقبا پوشش داده‌اند و ما کم داریم.'},
+  {id:'crawl',name:'سلامت سایت',desc:'نتیجهٔ کراول ماهانهٔ Screaming Frog از سایت ما: کد پاسخ صفحات، قابلیت ایندکس، عنوان و متا، تصاویر، لینک‌های شکسته، صفحات یتیم و عمق کراول.'},
+  {id:'technical',name:'سلامت فنی',desc:'همهٔ شاخص‌های CrUX (تجربهٔ واقعی کاربران Chrome) برای ما و رقبا، در موبایل و دسکتاپ، به‌علاوهٔ تعداد صفحات ایندکس‌شده.'},
+];
+
+/* =================== HOME =================== */
+function renderHero(){
+  const me=HEALTH.find(h=>h.id==='us'),pos=HEALTH.findIndex(h=>h.id==='us')+1;
+  const avgNow=avgRankHist.us[5],avgPrev=avgRankHist.us[4];
+  const top10=rankings.filter(r=>r.us<=10).length;
+  document.getElementById('hero').innerHTML=`
+    <div class="ring-box">${ring(me.score)}<div class="num"><div><b>${fa(me.score)}</b><small>شاخص سلامت سئو</small></div></div></div>
+    <div style="min-width:0">
+      <h1>استیل رخ جایگاه ${['','اول','دوم','سوم','چهارم','پنجم','ششم','هفتم','هشتم','نهم','دهم','یازدهم'][pos]||fa(pos)} را در میان ${fa(HEALTH.length)} سایتی دارد که دادهٔ کامل دارند</h1>
+      <p>رتبه‌ها رو به بهبودند؛ شکاف بک‌لینک و نبود Schema هنوز ما را عقب نگه داشته است.</p>
+      <div class="hero-kpis">
+        <div class="hk"><div class="l">میانگین رتبه</div><div class="v">${fad(avgNow)}<em class="up">▲ ${fad(avgPrev-avgNow)}</em></div></div>
+        <div class="hk"><div class="l">در صفحهٔ اول</div><div class="v">${fa(top10)}<em style="color:var(--on-hero-muted)">از ${fa(rankings.length)}</em></div></div>
+        <div class="hk"><div class="l">سهم دیده‌شدن</div><div class="v">${fad(SOV.us)}٪<em class="up">▲ ${fad(SOV.us-sovHist.us[4])}</em></div></div>
+      </div>
+    </div>
+    <div class="board"><h3>رده‌بندی</h3>
+      ${HEALTH.map((h,i)=>{const a=A(h.id);return `<div class="brow ${h.id==='us'?'me':''}"><span class="rk">${fa(i+1)}</span><span>${a.name}</span><span class="trk"><i style="width:${h.score}%;background:${a.color}"></i></span><span class="sc">${fa(h.score)}</span></div>`;}).join('')}
+    </div>`;
+}
+function renderTiles(){
+  const gapQuick=keywordGap.filter(g=>g.op==='quick');
+  const gapVol=keywordGap.reduce((s,g)=>s+g.vol,0);
+  const behind=clusters.filter(c=>c.p[0]<Math.max(...c.p)*.5).length;
+  const T={
+    rankings:`<div class="t-stat"><div><div class="t-big">${value(current.clicks)}</div><div class="t-sub">کلیک جستجوی گوگل · ۲۸ روز</div></div></div>`,
+    radar:`<span class="live"><i></i>${fa(events.length)} تغییر در آخرین مقایسه</span>${RMETA.is_sample?'<span class="chip n" style="margin-inline-start:8px">نمونه</span>':''}
+      <div class="feed-mini">${events.slice(0,7).map(e=>{const a=A(e.who)||{name:e.who,color:'var(--muted)'};return `<div class="fm" style="padding:6px 0;border-top:1px solid var(--line)"><span class="dot" style="background:${a.color}"></span><span class="who">${a.name}</span><span class="what">${e.t}</span></div>`;}).join('')}</div>`,
+    sov:`<div class="t-stat"><div><div class="t-big">${fad(SOV.us)}٪</div><div class="t-sub">سهم دیده‌شدن ما</div></div>${spark(sovHist.us,'var(--us)')}</div>`,
+    gap:`<div class="t-stat"><div><div class="t-big">${fa(gapQuick.length)}</div><div class="t-sub">فرصت Quick-win</div></div></div>`,
+    backlinks:(()=>{const comp=WITH(backlinks).filter(a=>a.id!=='us');
+      return `<div class="t-stat"><div><div class="t-big">${fa(backlinks.us.rd)}</div><div class="t-sub">دامنهٔ ارجاع‌دهنده${comp.length?` · رقیب برتر ${fa(Math.max(...comp.map(c=>backlinks[c.id].rd)))}`:''}</div></div></div>`;})(),
+    content:`<div class="t-stat"><div><div class="t-big">${fa(behind)}</div><div class="t-sub">خوشهٔ موضوعی که عقبیم</div></div></div>`,
+    crawl:(()=>{const h=(crawl.hist&&crawl.hist.critical)||[],n=h.length?h[h.length-1]:null,pv=h.length>1?h[h.length-2]:null;
+      return `<div class="t-stat"><div><div class="t-big">${n==null?'—':fa(n)}</div><div class="t-sub">خطای بحرانی در آخرین کراول</div></div>${h.length>1?spark(h,'var(--crit)',true):''}</div>
+      <div class="t-foot">${pv!=null?`<span class="chip ${pv-n>=0?'g':'c'}">${pv-n>=0?'▼':'▲'} ${fa(Math.abs(pv-n))} نسبت به کراول قبل</span>`:''}${CMETA.is_sample?'<span class="chip n">نمونه</span>':''}</div>`;})(),
+    technical:(()=>{const b=TF('us','phone');
+      if(!b)return `<div class="t-stat"><div><div class="t-big">—</div><div class="t-sub">دادهٔ CrUX برای سایت ما موجود نیست</div></div></div>`;
+      const ks=['lcp','inp','cls'].filter(k=>b.p75[k]!=null),n=ks.filter(k=>b.p75[k]<=TH[k].g).length,pass=cwvPass('us','phone');
+      return `<div class="t-stat"><div><div class="t-big">${fa(n)} از ${fa(ks.length)}</div><div class="t-sub">شاخص Core Web Vitals در محدودهٔ خوب</div></div></div>
+      <div class="t-foot"><span class="chip ${pass===null?'n':pass?'g':'c'}">${pass===null?'دادهٔ ناقص':pass?'قبول':'رد'} در موبایل</span>${TECH.meta.is_sample?'<span class="chip n">نمونه</span>':''}</div>`;})(),
+  };
+  document.getElementById('tiles').innerHTML=MODS.map(m=>`
+    <button type="button" class="tile ${m.id==='radar'?'big':m.id==='crawl'?'wide':''}" data-go="${m.id}">
+      <div class="t-head"><span class="t-ico">${ico(m.id)}</span><span class="t-name">${m.name}</span><span class="t-go">←</span></div>
+      ${T[m.id]}${realModules.has(m.id) ? '' : '<span class="chip n">دادهٔ نمونه</span>'}
+    </button>`).join('');
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go;});
+}
+
+/* =================== MODULES =================== */
+const R={};
+
+R.rankings=el=>{
+  const series=WITH(avgRankHist).map(a=>({name:a.name,color:a.color,values:avgRankHist[a.id],bold:a.id==='us'}));
+  const moved=rankings.map(r=>({kw:r.kw,d:r.prev-r.us,us:r.us})).filter(m=>m.d);
+  const up=moved.filter(m=>m.d>0).sort((a,b)=>b.d-a.d).slice(0,4),down=moved.filter(m=>m.d<0).sort((a,b)=>a.d-b.d).slice(0,4);
+  const buckets=[[1,3,'۱-۳','var(--good)'],[4,10,'۴-۱۰','var(--accent)'],[11,20,'۱۱-۲۰','var(--warn)'],[21,999,'+۲۰','var(--c4)']];
+  el.innerHTML=`
+  <div class="card"><h3>روند میانگین رتبه</h3><p class="hint">عدد کمتر بهتر است</p>
+    <div id="rchart"></div>${legend('rleg',series)}</div>
+  <div class="grid g2">
+    <div class="card"><h3>بیشترین صعود</h3>${up.map(m=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px solid var(--line)"><span>${m.kw}</span><span class="up" style="font-weight:700">▲ ${fa(m.d)}</span></div>`).join('')}</div>
+    <div class="card"><h3>بیشترین نزول</h3>${down.map(m=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px solid var(--line)"><span>${m.kw}</span><span class="down" style="font-weight:700">▼ ${fa(-m.d)}</span></div>`).join('')}</div>
+  </div>
+  <div class="card"><h3>جدول رتبه‌ها</h3><p class="hint">برای مرتب‌سازی روی عنوان ستون بزنید</p>
+    <div class="filters" id="rf"></div><div class="tw"><table id="rt"></table></div></div>`;
+  const draw=()=>{document.getElementById('rchart').innerHTML=lineChart({series,labels:MONTHS,invert:true,min:1,max:15});};
+  draw();bindLegend('rleg',series,()=>{draw();document.querySelectorAll('#rleg button').forEach((b,i)=>b.classList.toggle('off',!!series[i].hidden));});
+  let filt='all',sort={k:'vol',d:-1};
+  const IN={all:'همه',transactional:'خرید',commercial:'مقایسه‌ای',informational:'آموزشی'};
+  const INC={transactional:'g',commercial:'w',informational:'n'};
+  const tbl=()=>{
+    /* ستون‌ها به ترتیب میانگین رتبهٔ ماه آخر؛ سایت بی‌داده آخر */
+    const COLS=ACTORS.slice().sort((x,y)=>{const a=avgRankHist[x.id],b=avgRankHist[y.id];
+      if(!a&&!b)return 0;if(!a)return 1;if(!b)return -1;return a[5]-b[5];});
+    document.getElementById('rf').innerHTML=Object.entries(IN).map(([k,l])=>`<button type="button" class="fbtn ${filt===k?'on':''}" data-f="${k}">${l}</button>`).join('');
+    document.querySelectorAll('#rf button').forEach(b=>b.onclick=()=>{filt=b.dataset.f;tbl();});
+    let rows=rankings.filter(r=>filt==='all'||r.intent===filt).slice();
+    rows.sort((a,b)=>sort.k==='kw'?sort.d*a.kw.localeCompare(b.kw,'fa'):sort.d*((sort.k==='vol'?a.vol:rankOf(a,sort.k))-(sort.k==='vol'?b.vol:rankOf(b,sort.k))));
+    document.getElementById('rt').innerHTML=`<thead><tr><th data-k="kw">کلمه کلیدی</th><th data-k="vol">حجم</th>${COLS.map(a=>`<th data-k="${a.id}">${a.name}</th>`).join('')}<th>تغییر ما</th><th>نیت</th></tr></thead>
+      <tbody>${rows.map(r=>{const d=r.prev-r.us;return `<tr><td class="kw">${r.kw}</td><td>${fa(r.vol)}</td>${COLS.map(a=>`<td>${rk(rankOf(r,a.id),a.id==='us')}</td>`).join('')}
+      <td>${d>0?`<span class="up">▲ ${fa(d)}</span>`:d<0?`<span class="down">▼ ${fa(-d)}</span>`:'<span style="color:var(--muted)">—</span>'}</td><td><span class="chip ${INC[r.intent]}">${IN[r.intent]}</span></td></tr>`;}).join('')}</tbody>`;
+    document.querySelectorAll('#rt th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;sort=sort.k===k?{k,d:-sort.d}:{k,d:k==='vol'?-1:1};tbl();});
+  };
+  tbl();
+};
+
+R.radar=el=>{
+  let who='all',type='all';
+  const RAD=COMP.filter(c=>sfCompare[c.id]);
+  const totals=Object.fromEntries(RAD.map(c=>[c.id,events.filter(e=>e.who===c.id).length]));
+  const sum=c=>{const s=sfCompare[c.id];return (s.added||0)+(s.removed||0)+(s.title||0)+(s.meta||0)+(s.h1||0)+(s.schema||0);};
+  RAD.sort((a,b)=>sum(b)-sum(a));
+  el.innerHTML=`
+  <div class="card" style="padding:14px 18px!important">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span style="font-size:.76rem;color:var(--muted)">${fa(RAD.length)} رقیب با کراول مقایسه‌ای${RMETA.date?` · مقایسهٔ ${faSlash(RMETA.date)}`:''} · منبع: ${RMETA.source}</span>
+      ${RMETA.is_sample?'<span class="chip w">دادهٔ نمونه</span>':'<span class="chip g">دادهٔ واقعی</span>'}
+    </div>
+    ${(RMETA.notes&&RMETA.notes.length)?`<p class="hint" style="margin:10px 0 0!important">${RMETA.notes.map(n=>'· '+n).join('<br>')}</p>`:''}
+    <p class="hint" style="margin:10px 0 0!important">رقیبی که کراول مقایسه‌ای ندارد کارت نمی‌گیرد؛ نداشتن داده با نداشتن تحرک یکی نیست.</p>
+  </div>
+  <div class="compcards" id="cc"></div>
+  <div class="card" style="max-width:860px"><h3>جریان تحرکات</h3><p class="hint">جدیدترین‌ها بالا · منبع: مقایسهٔ کراول ماهانهٔ Screaming Frog (Compare)</p>
+    <div class="filters" id="tf"></div><div class="feed" id="feed"></div></div>`;
+  const draw=()=>{
+    document.getElementById('cc').innerHTML=RAD.map(c=>{const s=sfCompare[c.id],rows=RMETA.rows[c.id];
+      const bits=[s.added?`<span class="up">+${fa(s.added)}</span> صفحه`:'',s.removed?`<span class="down">−${fa(s.removed)}</span> صفحه`:'',
+        s.title?`${fa(s.title)} تغییر عنوان`:'',s.meta?`${fa(s.meta)} تغییر متا`:'',s.h1?`${fa(s.h1)} تغییر H1`:'',
+        s.schema?`Schema روی ${fa(s.schema)} صفحه`:''].filter(Boolean);
+      return `<button type="button" class="cc ${who===c.id?'on':''}" data-w="${c.id}"><div class="nm"><span class="dot" style="background:${c.color}"></span>${c.name}</div>
+      <div class="cnt">${fa(sum(c))} <small>تغییر در این مقایسه</small></div>
+      <div style="font-size:.74rem;color:var(--muted);margin-top:6px">${bits.length?bits.join(' · '):'در این مقایسه تغییری ثبت نشد'}</div>
+      ${(s.src==='overview')?`<div style="font-size:.7rem;color:var(--muted);margin-top:4px">شمارش از تب Compare · ${rows?`${fa(rows)} ردیف در جریان تحرکات`:'ردیف‌ها export نشده'}</div>`:''}
+</button>`;}).join('');
+    document.querySelectorAll('#cc button').forEach(b=>b.onclick=()=>{who=who===b.dataset.w?'all':b.dataset.w;draw();});
+    document.getElementById('tf').innerHTML=[['all','همه']].concat(Object.entries(EVTYPES).map(([k,v])=>[k,v.l])).filter(([k])=>k==='all'||events.some(e=>e.type===k)).map(([k,l])=>`<button type="button" class="fbtn ${type===k?'on':''}" data-t="${k}">${l}</button>`).join('');
+    document.querySelectorAll('#tf button').forEach(b=>b.onclick=()=>{type=b.dataset.t;draw();});
+    const list=events.filter(e=>(who==='all'||e.who===who)&&(type==='all'||e.type===type));
+    document.getElementById('feed').innerHTML=list.length?list.map(e=>{const a=A(e.who)||{name:e.who,color:'var(--muted)'},t=EVTYPES[e.type]||EVTYPES.page;return `<div class="ev">
+      <div class="ev-ico" style="background:${t.c}">${t.g}</div>
+      <div style="min-width:0"><div class="ev-top"><span class="dot" style="background:${a.color}"></span><span class="who">${a.name}</span>${e.impact==='high'?`<span class="chip c">اثر بالا</span>`:''}<span class="date">${e.date}</span></div>
+      <div class="ev-t">${e.t}</div>${e.url?`<div class="ev-url">${e.url}</div>`:''}
+      ${(e.old||e.nw)?`<div class="ev-url" style="white-space:normal">${e.old?`قبلی: ${e.old}`:''}${e.old&&e.nw?' ← ':''}${e.nw?`جدید: ${e.nw}`:''}</div>`:''}
+      ${e.act?`<div class="ev-act"><b>اقدام پیشنهادی:</b> ${e.act}</div>`:'<div class="ev-act" style="color:var(--muted)">اقدام پیشنهادی برای این تغییر نوشته نشده است.</div>'}</div></div>`;}).join(''):'<p class="hint" style="padding:20px 0">برای این فیلتر تحرکی ثبت نشده است.</p>';
+  };
+  draw();
+};
+R.sov=el=>{
+  const series=WITH(sovHist).map(a=>({name:a.name,color:a.color,values:sovHist[a.id],bold:a.id==='us'}));
+  const intents=[['transactional','کلمات خرید'],['commercial','کلمات مقایسه‌ای'],['informational','کلمات آموزشی']];
+  const sorted=ACTORS.slice().sort((a,b)=>SOV[b.id]-SOV[a.id]);const mx=SOV[sorted[0].id];
+  el.innerHTML=`
+  <div class="grid g21">
+    <div class="card"><h3>روند سهم دیده‌شدن</h3><p class="hint">درصد از کل کلیک‌های احتمالی روی ${fa(rankings.length)} کلمهٔ هدف</p><div id="schart"></div>${legend('sleg',series)}</div>
+    <div class="card"><h3>سهم فعلی</h3><p class="hint">مهر ۱۴۰۵</p>
+      <div class="brs">${sorted.map(a=>`<div class="br"><span style="font-weight:${a.id==='us'?800:500}">${a.name}</span><span class="tr" style="height:16px"><i style="width:${SOV[a.id]/mx*100}%;background:${a.color}"></i></span><span class="nv">${fad(SOV[a.id])}٪</span></div>`).join('')}</div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">${intents.map(([k,l])=>{const s=sovNow(k);const best=ACTORS.slice().sort((a,b)=>s[b.id]-s[a.id])[0];
+    return `<div class="card"><h3>${l}</h3><p class="hint">سهم ما در برابر پیشتاز این دسته</p>
+      <div style="display:flex;align-items:center;gap:16px"><div style="position:relative;width:96px;height:96px">${ring(s.us,96,10,'var(--us)','var(--surface-3)')}<div style="position:absolute;inset:0;display:grid;place-items:center;font-weight:800">${fad(s.us)}٪</div></div>
+      <div class="stat"><span class="l">پیشتاز</span><span class="v" style="font-size:1.1rem;color:${best.color}">${best.name}</span><span class="d" style="color:var(--muted)">${fad(s[best.id])}٪ سهم</span></div></div></div>`;}).join('')}</div>`;
+  const draw=()=>{document.getElementById('schart').innerHTML=lineChart({series,labels:MONTHS,min:0,max:Math.ceil(Math.max(...Object.values(sovHist).flat())/10)*10,fmt:v=>fad(v,0)+'٪'});};
+  draw();bindLegend('sleg',series,()=>{draw();document.querySelectorAll('#sleg button').forEach((b,i)=>b.classList.toggle('off',!!series[i].hidden));});
+};
+
+R.gap=el=>{
+  const W=700,H=330,pl=54,pr=20,pt=18,pb=40,kmax=60,vmax=5000;
+  const x=k=>pl+k/kmax*(W-pl-pr),y=v=>H-pb-v/vmax*(H-pt-pb);
+  const oc={quick:'var(--good)',med:'var(--warn)',long:'var(--c4)'};
+  let s=`<rect x="${x(0)}" y="${pt}" width="${x(30)-x(0)}" height="${H-pt-pb}" fill="var(--good)" fill-opacity=".07"/>
+    <text x="${x(15)}" y="${pt+16}" font-size="12" font-weight="700" fill="var(--good)" text-anchor="middle">منطقهٔ Quick-win</text>`;
+  [0,1000,2000,3000,4000,5000].forEach(v=>{s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-dasharray="3 4"/><text x="${pl-8}" y="${y(v)+4}" font-size="11" fill="var(--muted)" text-anchor="end">${fa(v)}</text>`;});
+  [0,10,20,30,40,50,60].forEach(k=>{s+=`<text x="${x(k)}" y="${H-pb+16}" font-size="11" fill="var(--muted)" text-anchor="middle">${fa(k)}</text>`;});
+  s+=`<text x="${(W+pl)/2}" y="${H-4}" font-size="11" fill="var(--muted)" text-anchor="middle">سختی کلمه (KD) ←</text>`;
+  keywordGap.forEach(g=>{const r=6+Math.sqrt(g.vol)/9;
+    s+=`<circle cx="${x(g.kd)}" cy="${y(g.vol)}" r="${r}" fill="${oc[g.op]}" fill-opacity=".55" stroke="${oc[g.op]}" stroke-width="1.5"><title>${g.kw} · حجم ${fa(g.vol)} · سختی ${fa(g.kd)}</title></circle>`;
+    if(g.vol>=900)s+=`<text x="${x(g.kd)}" y="${y(g.vol)-r-5}" font-size="11" fill="var(--fg)" text-anchor="middle" font-weight="600">${g.kw}</text>`;});
+  const w={quick:3,med:2,long:1};
+  const rows=keywordGap.slice().sort((a,b)=>w[b.op]*b.vol-w[a.op]*a.vol);
+  const kd=n=>`<span class="rk ${n<=25?'t':n<=40?'m':'l'}">${fa(n)}</span>`;
+  el.innerHTML=`
+  <div class="card"><h3>نقشهٔ فرصت‌ها</h3><p class="hint">${fa(keywordGap.length)} کلمه · اندازهٔ دایره = حجم جستجو · بالا و چپ بهترین فرصت‌ها</p>
+    <svg class="chart" viewBox="0 0 ${W} ${H}">${s}</svg>
+    <div class="legend"><span><span class="dot" style="background:var(--good)"></span>Quick-win</span><span><span class="dot" style="background:var(--warn)"></span>متوسط</span><span><span class="dot" style="background:var(--c4)"></span>بلندمدت</span></div></div>
+  <div class="card" style="margin-top:14px"><h3>فهرست کلمات</h3><p class="hint">مرتب بر اساس فرصت × حجم</p>
+    <div class="tw"><table><thead><tr><th>کلمه کلیدی</th><th>حجم</th><th>سختی</th><th>رقیب پیشتاز</th><th>رتبهٔ رقیب</th><th>فرصت</th></tr></thead>
+    <tbody>${rows.map(g=>`<tr><td class="kw">${g.kw}</td><td>${fa(g.vol)}</td><td>${kd(g.kd)}</td><td><span class="dot" style="background:${A(g.bc).color}"></span> ${A(g.bc).name}</td><td>${rk(g.cr)}</td><td><span class="chip ${OPP[g.op][0]}">${OPP[g.op][1]}</span></td></tr>`).join('')}</tbody></table></div></div>`;
+};
+
+R.backlinks=el=>{
+  const BL=WITH(backlinks);
+  const series=WITH(rdHist).map(a=>({name:a.name,color:a.color,values:rdHist[a.id],bold:a.id==='us'}));
+  const noData=ACTORS.filter(a=>!backlinks[a.id]);
+  const metric=(k,l,suf='')=>{const mx=Math.max(...BL.map(a=>backlinks[a.id][k]),1);
+    return `<div class="card"><h3>${l}</h3><div class="brs" style="margin-top:10px">${BL.slice().sort((a,b)=>backlinks[b.id][k]-backlinks[a.id][k]).map(a=>`<div class="br"><span style="font-weight:${a.id==='us'?800:500}">${a.name}</span><span class="tr"><i style="width:${backlinks[a.id][k]/mx*100}%;background:${a.color}"></i></span><span class="nv">${fa(backlinks[a.id][k])}${suf}</span></div>`).join('')}</div>${noData.length?`<p class="hint" style="margin:12px 0 0!important">بدون دادهٔ بک‌لینک (تا فاز ۴): ${noData.map(a=>a.name).join('، ')}</p>`:''}</div>`;};
+  const growth=WITH(rdHist).map(a=>({a,g:rdHist[a.id][5]-rdHist[a.id][0]}));
+  el.innerHTML=`
+  <div class="grid g2">${metric('rd','دامنه‌های ارجاع‌دهنده')}${metric('dr','امتیاز دامنه (DR)')}</div>
+  <div class="card"><h3>رشد دامنه‌های ارجاع‌دهنده</h3><p class="hint">۶ ماه اخیر</p><div id="bchart"></div>${legend('bleg',series)}
+      ${(()=>{const us=(rdHist.us[5]-rdHist.us[0])/6,c1=(rdHist.c1[5]-rdHist.c1[0])/6;return us>c1?`<p class="hint" style="margin-top:12px">با این سرعت، رسیدن به آهن آنلاین حدود ${fa(Math.ceil((backlinks.c1.rd-backlinks.us.rd)/(us-c1)))} ماه طول می‌کشد.</p>`:`<p class="hint" style="margin-top:12px">آهن آنلاین ماهانه ${fad(c1)} دامنه و ما ${fad(us)} دامنه اضافه می‌کنیم. با این سرعت شکاف ${fa(backlinks.c1.rd-backlinks.us.rd)} دامنه‌ای بسته نمی‌شود و کمپین لینک‌سازی لازم است.</p>`;})()}</div>
+  <div class="card"><h3>فرصت‌های لینک</h3><p class="hint">سایت‌هایی که به چند رقیب لینک داده‌اند ولی به ما نه</p>
+    <div class="tw"><table><thead><tr><th>سایت</th><th>نوع</th><th>DR</th>${BL.filter(a=>a.id!=='us').map(c=>`<th>${c.name}</th>`).join('')}<th>استیل رخ</th></tr></thead>
+    <tbody>${intersect.map(s=>`<tr><td class="kw">${s.site}</td><td><span class="chip n">${s.type}</span></td><td>${fa(s.dr)}</td>${BL.filter(a=>a.id!=='us').map(c=>`<td>${s.has.includes(c.id)?`<span class="rk t">✓</span>`:'<span style="color:var(--muted)">—</span>'}</td>`).join('')}<td><span class="rk l">✕</span></td></tr>`).join('')}</tbody></table></div></div>`;
+  const draw=()=>{document.getElementById('bchart').innerHTML=lineChart({series,labels:MONTHS,min:0,max:600,fmt:v=>fa(Math.round(v))});};
+  draw();bindLegend('bleg',series,()=>{draw();document.querySelectorAll('#bleg button').forEach((b,i)=>b.classList.toggle('off',!!series[i].hidden));});
+};
+
+R.content=el=>{
+  el.innerHTML=`
+  <div class="card"><h3>نقشهٔ حرارتی پوشش موضوعی</h3><p class="hint">تعداد صفحات هر سایت در هر خوشه. رنگ پررنگ‌تر یعنی پوشش بیشتر نسبت به بهترین سایت همان خوشه.</p>
+    <div class="tw" style="border:0"><table class="hm"><thead><tr><th style="text-align:right">خوشهٔ موضوعی</th>${ACTORS.slice(0,clusters[0].p.length).map(a=>`<th>${a.name}</th>`).join('')}<th>وضعیت ما</th></tr></thead>
+    <tbody>${clusters.map(c=>{const mx=Math.max(...c.p),ratio=c.p[0]/mx;
+      const st=ratio>=.8?['g','پیشتاز']:ratio>=.5?['w','قابل رقابت']:['c','عقب'];
+      return `<tr><td class="kw">${c.n}</td>${c.p.map((v,i)=>`<td style="background:color-mix(in srgb,${ACTORS[i].color} ${Math.round(10+v/mx*80)}%,var(--surface));color:${v/mx>.55?'#fff':'var(--fg)'}">${fa(v)}</td>`).join('')}<td><span class="chip ${st[0]}">${st[1]}</span></td></tr>`;}).join('')}</tbody></table></div></div>
+  <div>
+    <div class="card"><h3>پیشنهاد تقویم محتوا</h3><p class="hint">بر اساس شکاف و کلمات گپ</p>
+      <div class="chk">
+        <div class="ci"><span class="st c">۱</span><div><div class="tt">قیمت و بازار</div><div class="dd">۳ صفحه در برابر ۲۸. صفحه‌های قیمت روز برای هر محصول با تاریخ به‌روزرسانی.</div></div></div>
+        <div class="ci"><span class="st c">۲</span><div><div class="tt">میلگرد و پروفیل</div><div class="dd">نبشی، تسمه و میلگرد هر کدام صفحهٔ دسته و یک راهنمای خرید لازم دارند.</div></div></div>
+        <div class="ci"><span class="st w">۳</span><div><div class="tt">لوله و اتصالات</div><div class="dd">لوله مانیسمان و فلنج از کیوورد گپ، به‌علاوهٔ جدول وزن لوله.</div></div></div>
+        <div class="ci"><span class="st g">✓</span><div><div class="tt">محاسبات و ابزارها</div><div class="dd">پیشتازیم؛ ولی آهن آنلاین تازه ماشین‌حساب قیمت ورق منتشر کرده است.</div></div></div>
+      </div></div>
+  </div>`;
+};
+
+R.technical=el=>{
+  let ff='phone',met='lcp';
+
+  /* این ماژول همهٔ دامنه‌های config/sites.json را نشان می‌دهد، نه فقط چهار رقیب اصلی داشبرد:
+     سلامت فنی را برای هر دامنه‌ای که CrUX داده داشته باشد می‌شود گرفت و دور ریختنش حیف است.
+     پس ACTORS اینجا عمداً فهرست بزرگ‌ترِ TECH را می‌پوشاند و بقیهٔ ماژول‌ها دست نمی‌خورند.
+     رنگ و نام چهار رقیب اصلی از خود داشبرد می‌آید، بقیه از پالت زیر. */
+  const PAL=['#6f8fa6','#a67f6f','#6fa686','#a66f9b','#8f8f5e','#5e7f8f','#9b6fa6'];
+  const ACTORS=Object.entries(TECH.sites).map(([id,s],i)=>{const known=A(id);
+    return {id,name:(known&&known.name)||s.label||id,color:(known&&known.color)||PAL[i%PAL.length],extra:s.extra||{}};});
+  const usSite=ACTORS.find(a=>a.id==='us')||{extra:{}};
+  const M5=['lcp','inp','cls','fcp','ttfb'];
+  const SEG=[['var(--good)','خوب'],['var(--warn)','نیاز به بهبود'],['var(--crit)','ضعیف']];
+  const SUB=[['ttfb','تا اولین بایت','var(--c4)'],['delay','تأخیر شروع بارگذاری','var(--c2)'],['dur','مدت بارگذاری تصویر','var(--accent)'],['render','تأخیر رندر','var(--c1)']];
+  const NAV=[['navigate','ورود عادی','var(--accent)'],['navigate_cache','ورود با کش HTTP','var(--us)'],['back_forward_cache','بازگشت از bfcache','var(--good)'],['back_forward','بازگشت بدون کش','var(--warn)'],['reload','بارگذاری مجدد','var(--c3)'],['restore','بازیابی تب','var(--c2)'],['prerender','پیش‌رندر','var(--c1)']];
+  const nd='<span style="color:var(--muted)">—</span>';
+  const stack=(parts)=>`<div class="dbar">${parts.filter(p=>p.v>0).map(p=>`<i style="flex:${p.v};background:${p.c}" title="${p.t}">${p.lab}</i>`).join('')}</div>`;
+  const meta=TECH.meta||{},per=meta.period||{};
+  const faDate=s=>s?toFa(s.replace(/-/g,'/')):'؟';
+  el.innerHTML=`
+  <div class="card" style="padding:14px 18px!important">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div class="filters" id="ff" style="margin:0"></div>
+      <span style="font-size:.76rem;color:var(--muted)">دادهٔ میدانی CrUX · تجربهٔ واقعی کاربران Chrome · صدک ۷۵ · دورهٔ ${faDate(per.first)} تا ${faDate(per.last)}</span>
+      ${meta.is_sample?'<span class="chip w">دادهٔ نمونه</span>':'<span class="chip g">دادهٔ واقعی</span>'}
+    </div>
+    ${(meta.notes&&meta.notes.length)?`<p class="hint" style="margin:10px 0 0!important">${meta.notes.map(n=>'· '+n).join('<br>')}</p>`:''}
+  </div>
+  <div class="card"><h3>ارزیابی Core Web Vitals</h3><p class="hint">قبول یعنی هر سه شاخص LCP و INP و CLS در محدودهٔ خوب باشند. سایتی که ترافیک کافی نداشته باشد در CrUX رکورد ندارد.</p><div class="tw"><table id="cwv"></table></div></div>
+  <div class="card"><h3>توزیع تجربهٔ کاربران</h3><p class="hint">سهم واقعی بازدیدها در هر محدوده. صدک ۷۵ یک عدد است؛ این نوار نشان می‌دهد پشت آن عدد چه خبر است.</p>
+    <div class="filters" id="mf"></div><div class="dist" id="mdist"></div>
+    <div class="legend">${SEG.map(s=>`<span><span class="sw" style="background:${s[0]}"></span>${s[1]}</span>`).join('')}<span id="mth"></span></div></div>
+  <div class="grid g2">
+    <div class="card"><h3>اجزای LCP</h3><p class="hint">مراحل رسیدن به بزرگ‌ترین تصویر صفحه. هر جزء صدک ۷۵ خودش است، پس جمعشان دقیقاً برابر LCP نمی‌شود؛ نسبت‌ها را ببین، نه جمع را.</p><div class="dist" id="lsub"></div>
+      <div class="legend">${SUB.map(s=>`<span><span class="sw" style="background:${s[2]}"></span>${s[1]}</span>`).join('')}</div>
+      <p class="hint" id="ltype" style="margin:14px 0 0!important"></p></div>
+    <div class="card"><h3>کیفیت شبکهٔ کاربران</h3><p class="hint">RTT زمان رفت‌و‌برگشت شبکهٔ کاربران است و به سرعت سایت ما ربطی ندارد؛ برای تفسیر TTFB لازم است.</p><div class="brs" id="rtt"></div></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h3>نوع ناوبری</h3><p class="hint">سهم بیشتر bfcache و پیش‌رندر یعنی بازگشت‌های فوری‌تر. هفت نوع ناوبری CrUX، مجموعشان تقریباً ۱۰۰ درصد.</p><div class="dist" id="nav"></div>
+      <div class="legend">${NAV.map(n=>`<span><span class="sw" style="background:${n[2]}"></span>${n[1]}</span>`).join('')}</div></div>
+    <div class="card"><h3>زمان‌های آزمایشگاهی</h3><p class="hint">یک اجرای Lighthouse روی صفحهٔ اصلی، نه تجربهٔ کاربران واقعی. CrUX این سه زمان را ندارد. با اعداد جدول بالا مقایسه نکن.</p><div class="tw"><table id="lab" style="min-width:420px"></table></div></div>
+  </div>
+  <div class="card"><h3>صفحات ایندکس‌شده</h3><p class="hint">ما از Search Console؛ رقبا از ابزار پولی. این عدد دستی در config/manual-overrides.json پر می‌شود و از CrUX نمی‌آید.</p>
+    <div class="brs" id="idx"></div>
+    <p class="hint" id="idxnote" style="margin:14px 0 0!important"></p></div>
+  <div class="card"><h3>مشکلات فنی ما</h3><p class="hint">به ترتیب اولویت</p><div class="chk" id="iss"></div></div>`;
+
+  const draw=()=>{
+    document.getElementById('ff').innerHTML=[['phone','موبایل'],['desktop','دسکتاپ']].map(([k,l])=>`<button type="button" class="fbtn ${ff===k?'on':''}" data-f="${k}">${l}</button>`).join('');
+    document.querySelectorAll('#ff button').forEach(b=>b.onclick=()=>{ff=b.dataset.f;draw();});
+    const D=Object.fromEntries(ACTORS.map(a=>[a.id,TF(a.id,ff)]));
+    const reason=id=>{const s=TECH.sites[id]||{};
+      if(s.missing_origin)return 'دامنه وارد نشده';
+      return ((s[ff]||{}).reason)||'بدون دادهٔ CrUX';};
+
+    /* ترتیب هر کارت بر اساس خوب بودن همان شاخص است، نه جای ثابت سایت در فهرست.
+       score عددی می‌دهد که کوچک‌تر یعنی بهتر، یا null برای سایت بی‌داده که آخر می‌رود.
+       ردیف ما از رنگ و پررنگی پیدا می‌شود، نه از جایگاهش. */
+    const byBest=score=>ACTORS.slice().sort((x,y)=>{const a=score(x),b=score(y);
+      if(a===null&&b===null)return 0;if(a===null)return 1;if(b===null)return -1;return a-b;});
+
+    /* Core Web Vitals: اول قبول‌شده‌ها، بعد به ترتیب LCP. دادهٔ ناقص بعد از کامل‌ها. */
+    const cwvScore=a=>{const d=D[a.id];if(!d)return null;
+      const ks=['lcp','inp','cls'].filter(k=>d.p75[k]!=null);
+      const good=ks.filter(k=>d.p75[k]<=TH[k].g).length;
+      return (ks.length<3?1e9:0)+(3-good)*1e6+(d.p75.lcp!=null?d.p75.lcp:1e5);};
+    // CWV table
+    document.getElementById('cwv').innerHTML=`<thead><tr><th>سایت</th>${M5.map(k=>`<th title="${TH[k].fa}">${TH[k].n}</th>`).join('')}<th>نتیجه</th></tr></thead>
+      <tbody>${byBest(cwvScore).map(a=>{const d=D[a.id];
+        if(!d)return `<tr class="${a.id==='us'?'me':''}"><td class="kw"><span class="dot" style="background:${a.color}"></span> ${a.name}</td><td colspan="${M5.length}" style="color:var(--muted)">${reason(a.id)}</td><td><span class="chip n">—</span></td></tr>`;
+        const pass=cwvPass(a.id,ff);
+        return `<tr class="${a.id==='us'?'me':''}"><td class="kw"><span class="dot" style="background:${a.color}"></span> ${a.name}</td>${M5.map(k=>`<td>${d.p75[k]==null?nd:`<span class="rk ${mCls(k,d.p75[k])}">${fmtM(k,d.p75[k])}</span>`}</td>`).join('')}<td><span class="chip ${pass===null?'n':pass?'g':'c'}">${pass===null?'ناقص':pass?'قبول':'رد'}</span></td></tr>`;}).join('')}</tbody>`;
+    // distribution
+    document.getElementById('mf').innerHTML=M5.map(k=>`<button type="button" class="fbtn ${met===k?'on':''}" data-m="${k}">${TH[k].n}</button>`).join('');
+    document.querySelectorAll('#mf button').forEach(b=>b.onclick=()=>{met=b.dataset.m;draw();});
+    const distScore=a=>{const d=D[a.id];return (d&&d.dist[met]&&d.p75[met]!=null)?d.p75[met]:null;};
+    document.getElementById('mdist').innerHTML=byBest(distScore).map(a=>{const d=D[a.id],ds=d&&d.dist[met];
+      if(!ds)return `<div class="drow" style="grid-template-columns:86px 1fr 64px"><b>${a.name}</b><span class="hint" style="margin:0!important">${d?'این شاخص برای این سایت گزارش نشده':reason(a.id)}</span><span></span></div>`;
+      return `<div class="drow" style="grid-template-columns:86px 1fr 64px"><b>${a.name}</b>${stack(ds.map((v,i)=>({v,c:SEG[i][0],t:SEG[i][1]+': '+v+'٪',lab:v>=8?fad(v,0)+'٪':''})))}<span style="font-size:.76rem;font-weight:700;text-align:left">${fmtM(met,d.p75[met])}</span></div>`;}).join('');
+    const t=TH[met];
+    document.getElementById('mth').innerHTML=`· ${t.fa} · خوب تا ${fmtM(met,t.g)}، ضعیف از ${fmtM(met,t.p)}`;
+    // LCP subparts — مستقیم از CrUX
+    const withParts=ACTORS.filter(a=>D[a.id]&&Object.keys(D[a.id].parts||{}).length);
+    const maxSum=Math.max(1,...withParts.map(a=>SUB.reduce((s,x)=>s+(D[a.id].parts[x[0]]||0),0)));
+    const partScore=a=>{const d=D[a.id],p=d&&d.parts;
+      return (p&&Object.keys(p).length)?SUB.reduce((t,x)=>t+(p[x[0]]||0),0):null;};
+    document.getElementById('lsub').innerHTML=byBest(partScore).map(a=>{const d=D[a.id],p=d&&d.parts;
+      if(!p||!Object.keys(p).length)return `<div class="drow" style="grid-template-columns:86px 1fr"><b>${a.name}</b><span class="hint" style="margin:0!important">${d?'عنصر LCP این سایت تصویر نیست یا دادهٔ کافی ندارد':reason(a.id)}</span></div>`;
+      const total=SUB.reduce((s,x)=>s+(p[x[0]]||0),0);
+      return `<div class="drow" style="grid-template-columns:86px 1fr"><b>${a.name}</b><div style="width:${Math.max(12,total/maxSum*100)}%">${stack(SUB.map(x=>({v:p[x[0]]||0,c:x[2],t:x[1]+': '+(p[x[0]]||0)+' ms',lab:''})))}</div></div>`;}).join('');
+    const imgs=ACTORS.filter(a=>D[a.id]&&D[a.id].lcp_image!=null).sort((x,y)=>D[y.id].lcp_image-D[x.id].lcp_image);
+    document.getElementById('ltype').innerHTML=imgs.length?`عنصر LCP تصویر است در: ${imgs.map(a=>`${a.name} ${fad(D[a.id].lcp_image,0)}٪`).join(' · ')}`:'دادهٔ نوع عنصر LCP برای هیچ سایتی گزارش نشده است.';
+    // RTT
+    const rttRows=ACTORS.filter(a=>D[a.id]&&D[a.id].p75.rtt!=null);
+    const rttMax=Math.max(1,...rttRows.map(a=>D[a.id].p75.rtt));
+    document.getElementById('rtt').innerHTML=rttRows.length?rttRows.slice().sort((x,y)=>D[x.id].p75.rtt-D[y.id].p75.rtt).map(a=>`<div class="br"><span style="font-weight:${a.id==='us'?800:500}">${a.name}</span><span class="tr"><i style="width:${D[a.id].p75.rtt/rttMax*100}%;background:${a.color}"></i></span><span class="nv">${fa(D[a.id].p75.rtt)} ms</span></div>`).join(''):'<p class="hint" style="margin:0!important">RTT برای هیچ سایتی گزارش نشده است.</p>';
+    // nav types — هفت نوع CrUX
+    const navScore=a=>{const d=D[a.id],n=d&&d.nav;
+      return n?-((n.navigate_cache||0)+(n.back_forward_cache||0)+(n.prerender||0)):null;};
+    document.getElementById('nav').innerHTML=byBest(navScore).map(a=>{const d=D[a.id],n=d&&d.nav;
+      if(!n)return `<div class="drow"><b>${a.name}</b><span class="hint" style="margin:0!important">${d?'نوع ناوبری برای این سایت گزارش نشده':reason(a.id)}</span></div>`;
+      return `<div class="drow"><b>${a.name}</b>${stack(NAV.map(x=>({v:n[x[0]]||0,c:x[2],t:x[1]+': '+(n[x[0]]||0)+'٪',lab:(n[x[0]]||0)>=9?fad(n[x[0]],0)+'٪':''})))}</div>`;}).join('');
+    // زمان‌های آزمایشگاهی
+    const LABK=[['fp','First Paint'],['dcl','DOMContentLoaded'],['onload','Onload']];
+    document.getElementById('lab').innerHTML=`<thead><tr><th>سایت</th><th>امتیاز عملکرد</th>${LABK.map(l=>`<th>${l[1]}</th>`).join('')}</tr></thead>
+      <tbody>${byBest(a=>{const l=TLAB(a.id,ff);return (l&&l.score!=null)?-l.score:null;}).map(a=>{const lab=TLAB(a.id,ff);
+        if(!lab)return `<tr class="${a.id==='us'?'me':''}"><td class="kw">${a.name}</td><td colspan="4" style="color:var(--muted)">PageSpeed برای این سایت اجرا نشده</td></tr>`;
+        const sc=lab.score;
+        return `<tr class="${a.id==='us'?'me':''}"><td class="kw">${a.name}</td><td>${sc==null?nd:`<span class="rk ${sc>=90?'t':sc>=50?'m':'l'}">${fa(sc)}</span>`}</td>${LABK.map(l=>`<td>${lab[l[0]]==null?nd:fmtM(l[0],lab[l[0]])}</td>`).join('')}</tr>`;}).join('')}</tbody>`;
+    // صفحات ایندکس‌شده
+    const idxOf=a=>(a.extra.idx>0?a.extra.idx:0);
+    const idxRows=ACTORS.filter(a=>idxOf(a)>0);
+    const idxMax=Math.max(1,...idxRows.map(idxOf));
+    document.getElementById('idx').innerHTML=idxRows.length?idxRows.slice().sort((x,y)=>idxOf(y)-idxOf(x)).map(a=>`<div class="br"><span style="font-weight:${a.id==='us'?800:500}">${a.name}</span><span class="tr"><i style="width:${idxOf(a)/idxMax*100}%;background:${a.color}"></i></span><span class="nv">${fa(idxOf(a))}</span></div>`).join(''):'<p class="hint" style="margin:0!important">عدد ایندکس هنوز وارد نشده است.</p>';
+    const missingIdx=ACTORS.filter(a=>idxOf(a)===0);
+    document.getElementById('idxnote').innerHTML=[idxOf(usSite)>0?`ایندکس ما در ۶ ماه از ${fa(idxHist[0])} به ${fa(idxHist[5])} صفحه رسیده است.`:'',missingIdx.length?`بدون عدد ایندکس: ${missingIdx.map(a=>a.name).join('، ')}`:''].filter(Boolean).join(' · ');
+    // issues
+    const us=D.us,iss=[];
+    if(!us){
+      iss.push(['c','دادهٔ CrUX برای سایت ما نیست',`${reason('us')} — بدون این داده نمی‌شود گفت کاربران واقعی چه تجربه‌ای دارند.`]);
+    }else{
+      if(usSite.extra.schema==='no'){
+        const withSchema=ACTORS.filter(a=>a.id!=='us'&&a.extra.schema==='yes').length;
+        iss.push(['c','داده‌های ساختاریافته نداریم',withSchema?`${fa(withSchema)} رقیب Product و FAQ Schema دارند. برای صفحات محصول، دسته و مقالات اضافه شود.`:'برای صفحات محصول، دسته و مقالات اضافه شود. وضعیت رقبا هنوز بررسی نشده است.']);
+      }
+      M5.forEach(k=>{const v=us.p75[k];
+        if(v==null||v<=TH[k].g)return;
+        const better=ACTORS.filter(a=>a.id!=='us'&&D[a.id]&&D[a.id].p75[k]!=null&&D[a.id].p75[k]<v).sort((x,y)=>D[x.id].p75[k]-D[y.id].p75[k])[0];
+        const poor=v>TH[k].p;
+        iss.push([poor?'c':'w',`${TH[k].n} ${poor?'ضعیف':'نیاز به بهبود'} است`,`${fmtM(k,v)} در برابر آستانهٔ خوب ${fmtM(k,TH[k].g)}`+(better?` · بهترین رقیب: ${better.name} با ${fmtM(k,D[better.id].p75[k])}`:'')+`. ${TIPS[k]}`]);});
+      const opps=((TLAB('us',ff)||{}).opps)||[];
+      opps.forEach(o=>iss.push(['w',o.t,`تا ${fa(o.ms)} میلی‌ثانیه صرفه‌جویی — از فهرست فرصت‌های Lighthouse (آزمایشگاهی).`]));
+    }
+    const usIdx=usSite.extra.idx>0?usSite.extra.idx:0;
+    if(usIdx>0){
+      const bigger=ACTORS.filter(a=>a.id!=='us'&&a.extra.idx>usIdx).sort((x,y)=>y.extra.idx-x.extra.idx)[0];
+      if(bigger)iss.push(['w','صفحات ایندکس‌شده کم است',`${fa(usIdx)} صفحه در برابر ${fa(bigger.extra.idx)} صفحهٔ ${bigger.name}.`]);
+    }
+    document.getElementById('iss').innerHTML=iss.length?iss.map(i=>`<div class="ci"><span class="st ${i[0]}">!</span><div><div class="tt">${i[1]}</div><div class="dd">${i[2]}</div></div></div>`).join(''):'<p class="hint" style="margin:0!important">در این form factor مشکلی پیدا نشد.</p>';
+  };
+  draw();
+};
+
+/* ---- نمونهٔ داخلی سلامت سایت؛ تا crawl.json نیاید همین نشان داده می‌شود ---- */
+const SAMPLE_CRAWL={
+  urls:612,indexable:340,respMs:820,labels:MONTHS,
+  hist:{critical:[48,41,36,30,27,22],warning:[210,196,182,170,161,148],opportunity:[340,332,318,305,296,288]},
+  status:[['۲xx',545,'var(--good)'],['۳xx',38,'var(--warn)'],['۴xx',27,'var(--crit)'],['۵xx',2,'var(--c3)']],
+  index:[['قابل ایندکس',340,'var(--good)'],['Canonical به صفحهٔ دیگر',118,'var(--accent)'],['noindex',96,'var(--c2)'],['ریدایرکت و خطا',58,'var(--c4)']],
+  depth:[['۱',14],['۲',96],['۳',180],['۴',210],['۵+',112]],
+  issues:[
+    {n:'لینک داخلی به صفحهٔ ۴۰۴',l:'critical',u:27,d:-5,g:'لینک‌ها را اصلاح یا به صفحهٔ معادل ریدایرکت کنید.'},
+    {n:'Canonical به صفحهٔ غیرقابل ایندکس',l:'critical',u:3,d:0,g:'Canonical باید به نسخهٔ ۲۰۰ و قابل ایندکس اشاره کند.'},
+    {n:'صفحهٔ بدون عنوان',l:'critical',u:4,d:-2,g:''},
+    {n:'خطای سرور ۵xx',l:'critical',u:2,d:0,g:''},
+    {n:'تصویر بدون متن جایگزین (alt)',l:'warning',u:214,d:-30,g:''},
+    {n:'متادیسکریپشن خالی',l:'warning',u:58,d:-10,g:'با مهارت متای Rank Math قابل رفع است.'},
+    {n:'عنوان تکراری',l:'warning',u:46,d:-6,g:''},
+    {n:'صفحهٔ یتیم (بدون لینک داخلی)',l:'warning',u:18,d:3,g:'از صفحات دستهٔ مرتبط به آن‌ها لینک بدهید.'},
+    {n:'H1 خالی',l:'warning',u:12,d:-1,g:''},
+    {n:'زنجیرهٔ ریدایرکت',l:'warning',u:9,d:2,g:''},
+    {n:'تصویر بزرگ‌تر از ۱۰۰ کیلوبایت',l:'opportunity',u:96,d:-8,g:''},
+    {n:'عمق کراول بیشتر از ۴ کلیک',l:'opportunity',u:44,d:-4,g:''},
+    {n:'متادیسکریپشن بلندتر از ۱۵۵ کاراکتر',l:'opportunity',u:37,d:1,g:''},
+    {n:'چند H1 در یک صفحه',l:'opportunity',u:21,d:0,g:''},
+  ],
+};
+let crawl=SAMPLE_CRAWL;
+let CMETA={is_sample:true,source:'نمونهٔ داخلی داشبرد',crawl_date:'1405-07-30',notes:[]};
+
+/* crawl.json کنار همین صفحه، خروجی scripts/screaming_frog.py از Issues Overview و
+   Crawl Overview. هر مقداری که در فایل نباشد خالی می‌ماند و کارتش «—» می‌خورد؛
+   نبودن داده با صفر بودن یکی نیست. */
+function applyCrawlJson(j){
+  if(!j||!Array.isArray(j.issues)||!j.issues.length)return false;
+  const m=j.meta||{},ov=j.overview||{},st=ov.status||{},ix=ov.index||{},dp=ov.depth||{};
+  const H=(Array.isArray(j.history)?j.history:[]).slice(-6);
+  const SC=[['۲xx','2xx','var(--good)'],['۳xx','3xx','var(--warn)'],['۴xx','4xx','var(--crit)'],['۵xx','5xx','var(--c3)']];
+  const IX=[['قابل ایندکس','indexable','var(--good)'],['Canonical به صفحهٔ دیگر','canonicalised','var(--accent)'],['noindex','noindex','var(--c2)'],['بقیه','other','var(--c4)']];
+  const DP=[['۱','1'],['۲','2'],['۳','3'],['۴','4'],['۵+','5_plus']];
+  const n=v=>typeof v==='number'?v:null;
+  crawl={
+    urls:n(ov.total_urls),indexable:n(ov.indexable),respMs:n(ov.avg_response_ms),
+    labels:H.map(h=>shortDate(h.date)),
+    hist:{critical:H.map(h=>n(h.critical)||0),warning:H.map(h=>n(h.warning)||0),opportunity:H.map(h=>n(h.opportunity)||0)},
+    status:SC.filter(s=>n(st[s[1]])!=null).map(s=>[s[0],st[s[1]],s[2]]),
+    index:IX.filter(s=>n(ix[s[1]])!=null).map(s=>[s[0],ix[s[1]],s[2]]),
+    depth:DP.filter(d=>n(dp[d[1]])!=null).map(d=>[d[0],dp[d[1]]]),
+    issues:j.issues.map(i=>({n:esc(i.fa||i.name||'بدون نام'),l:(i.level==='critical'||i.level==='opportunity')?i.level:'warning',
+      u:n(i.urls)||0,d:n(i.delta),g:esc(i.guide||''),pct:n(i.percent)})),
+  };
+  CMETA={is_sample:!!m.is_sample,source:esc(m.source||'Screaming Frog'),crawl_date:esc(m.crawl_date||''),
+    notes:(Array.isArray(m.notes)?m.notes:[]).map(esc)};
+  return true;
+}
+/* ---- نمونهٔ داخلی شمارش Compare رقبا ---- */
+const SAMPLE_COMPARE={
+  c1:{added:18,removed:4,title:12,meta:9,h1:5,schema:0},
+  c2:{added:9,removed:1,title:6,meta:14,h1:2,schema:142},
+  c3:{added:15,removed:2,title:3,meta:4,h1:1,schema:0},
+  c4:{added:2,removed:7,title:1,meta:0,h1:0,schema:0},
+};
+let sfCompare=SAMPLE_COMPARE;
+const LVL={critical:['c','بحرانی','var(--crit)'],warning:['w','هشدار','var(--warn)'],opportunity:['n','پیشنهاد','var(--c4)']};
+
+R.crawl=el=>{
+  const H=crawl.hist||{},L=crawl.labels||[];
+  const arr=k=>Array.isArray(H[k])?H[k]:[];
+  const last=k=>{const a=arr(k);return a.length?a[a.length-1]:null;};
+  const prev=k=>{const a=arr(k);return a.length>1?a[a.length-2]:null;};
+  const hasTrend=L.length>=2;
+  const series=[['critical','بحرانی','var(--crit)'],['warning','هشدار','var(--warn)'],['opportunity','پیشنهاد','var(--c4)']]
+    .map(([k,n,c])=>({name:n,color:c,values:arr(k),bold:k==='critical'}));
+  const cmax=Math.max(10,...series.reduce((s,x)=>s.concat(x.values),[]));
+  const nd='<span style="color:var(--muted)">—</span>';
+  const numOr=v=>v==null?nd:fa(v);
+  const stk=(rows)=>{const t=rows.reduce((s,r)=>s+r[1],0)||1;
+    return `<div class="dbar" style="height:26px">${rows.map(r=>`<i style="flex:${r[1]};background:${r[2]}" title="${r[0]}: ${r[1]}">${r[1]/t>=.08?fa(r[1]):''}</i>`).join('')}</div>
+    <div class="legend">${rows.map(r=>`<span><span class="sw" style="background:${r[2]}"></span>${r[0]} ${fa(r[1])}</span>`).join('')}</div>`;};
+  const dmax=Math.max(1,...(crawl.depth||[]).map(d=>d[1]));
+  const dCrit=(last('critical')!=null&&prev('critical')!=null)?prev('critical')-last('critical'):null;
+  const anyDelta=(crawl.issues||[]).some(i=>i.d!=null);
+  const anyPct=(crawl.issues||[]).some(i=>i.pct!=null);
+  el.innerHTML=`
+  <div class="card" style="padding:14px 18px!important">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span style="font-size:.76rem;color:var(--muted)">steelrokh.com · کراول ${faSlash(CMETA.crawl_date)} · منبع: ${CMETA.source}</span>
+      ${CMETA.is_sample?'<span class="chip w">دادهٔ نمونه</span>':'<span class="chip g">دادهٔ واقعی</span>'}
+    </div>
+    ${(CMETA.notes&&CMETA.notes.length)?`<p class="hint" style="margin:10px 0 0!important">${CMETA.notes.map(n=>'· '+n).join('<br>')}</p>`:''}
+  </div>
+  <div class="card"><div style="display:flex;gap:40px;flex-wrap:wrap">
+    <div class="stat"><span class="l">URL کراول‌شده</span><span class="v">${numOr(crawl.urls)}</span></div>
+    <div class="stat"><span class="l">قابل ایندکس</span><span class="v">${numOr(crawl.indexable)}</span></div>
+    <div class="stat"><span class="l">خطای بحرانی</span><span class="v down">${numOr(last('critical'))}</span>${dCrit!=null?`<span class="d ${dCrit>=0?'up':'down'}">${dCrit>=0?'▼':'▲'} ${fa(Math.abs(dCrit))} نسبت به کراول قبل</span>`:'<span class="d" style="color:var(--muted)">کراول قبلی برای مقایسه نیست</span>'}</div>
+    <div class="stat"><span class="l">میانگین زمان پاسخ</span><span class="v">${crawl.respMs==null?nd:`<span dir="ltr">${fa(crawl.respMs)} ms</span>`}</span></div>
+  </div></div>
+  ${hasTrend?`<div class="card"><h3>روند خطاها</h3><p class="hint">تعداد URLهای درگیر در هر سطح، ${fa(L.length)} کراول اخیر</p><div id="cchart"></div>${legend('cleg',series)}</div>`
+    :`<div class="card"><h3>روند خطاها</h3><p class="hint" style="margin:0!important">برای رسم روند حداقل دو کراول لازم است. الان فقط کراول ${faSlash(CMETA.crawl_date)} را داریم؛ با کراول بعدی این نمودار خودش می‌آید.</p></div>`}
+  <div class="grid g2">
+    <div class="card"><h3>وضعیت صفحات</h3>
+      ${(crawl.status||[]).length?`<p class="hint">کد پاسخ سرور</p>${stk(crawl.status)}`:'<p class="hint" style="margin:0!important">کد پاسخ صفحات در Crawl Overview نبود.</p>'}
+      ${(crawl.index||[]).length?`<p class="hint" style="margin:22px 0 10px!important">قابلیت ایندکس</p>${stk(crawl.index)}`:''}</div>
+    <div class="card"><h3>عمق کراول</h3><p class="hint">چند کلیک از صفحهٔ اصلی فاصله دارند؛ بیشتر از ۳ کلیک برای صفحات مهم زیاد است</p>
+      ${(crawl.depth||[]).length?`<div class="brs">${crawl.depth.map(d=>`<div class="br"><span>${d[0]} کلیک</span><span class="tr"><i style="width:${d[1]/dmax*100}%;background:${d[0]==='۴'||d[0]==='۵+'?'var(--warn)':'var(--accent)'}"></i></span><span class="nv">${fa(d[1])}</span></div>`).join('')}</div>`
+        :'<p class="hint" style="margin:0!important">تعداد URL در هر عمق در Crawl Overview نبود.</p>'}</div>
+  </div>
+  <div class="card"><h3>فهرست خطاها</h3><p class="hint">به ترتیب سطح و تعداد URL · ${fa((crawl.issues||[]).length)} خطا</p><div class="filters" id="lf"></div><div class="tw"><table id="it"></table></div></div>`;
+  if(hasTrend){
+    const draw=()=>{document.getElementById('cchart').innerHTML=lineChart({series,labels:L,min:0,max:cmax,fmt:v=>fa(Math.round(v))});};
+    draw();bindLegend('cleg',series,()=>{draw();document.querySelectorAll('#cleg button').forEach((b,i)=>b.classList.toggle('off',!!series[i].hidden));});
+  }
+  let lv='all';
+  const tbl=()=>{
+    document.getElementById('lf').innerHTML=[['all','همه']].concat(Object.entries(LVL).map(([k,v])=>[k,v[1]]))
+      .filter(([k])=>k==='all'||(crawl.issues||[]).some(i=>i.l===k))
+      .map(([k,l])=>`<button type="button" class="fbtn ${lv===k?'on':''}" data-l="${k}">${l}</button>`).join('');
+    document.querySelectorAll('#lf button').forEach(b=>b.onclick=()=>{lv=b.dataset.l;tbl();});
+    const ord={critical:0,warning:1,opportunity:2};
+    const rows=(crawl.issues||[]).filter(i=>lv==='all'||i.l===lv).sort((a,b)=>ord[a.l]-ord[b.l]||b.u-a.u);
+    document.getElementById('it').innerHTML=`<thead><tr><th>خطا</th><th>سطح</th><th>URL درگیر</th>${anyPct?'<th>٪ از کل</th>':''}${anyDelta?'<th>نسبت به کراول قبل</th>':''}</tr></thead>
+      <tbody>${rows.map(i=>`<tr><td class="kw">${i.n}${i.g?`<div style="font-weight:400;font-size:.76rem;color:var(--muted)">${i.g}</div>`:''}</td>
+      <td><span class="chip ${LVL[i.l][0]}">${LVL[i.l][1]}</span></td><td>${fa(i.u)}</td>
+      ${anyPct?`<td>${i.pct==null?nd:fad(i.pct)+'٪'}</td>`:''}
+      ${anyDelta?`<td>${i.d==null?nd:i.d<0?`<span class="up">▼ ${fa(-i.d)}</span>`:i.d>0?`<span class="down">▲ ${fa(i.d)}</span>`:'<span style="color:var(--muted)">بدون تغییر</span>'}</td>`:''}</tr>`).join('')}</tbody>`;
+  };
+  tbl();
+};
+/* =================== ROUTER =================== */
+function showHome(){document.getElementById('module').hidden=true;document.getElementById('home').hidden=false;}
+function showModule(id){
+  const m=MODS.find(x=>x.id===id);
+  document.getElementById('home').hidden=true;document.getElementById('module').hidden=false;
+  document.getElementById('mod-title').textContent=m.name;
+  document.getElementById('mod-desc').textContent=m.desc;
+  document.getElementById('switch').innerHTML=MODS.map(x=>`<button type="button" class="${x.id===id?'on':''}" data-go="${x.id}">${x.name}</button>`).join('');
+  document.querySelectorAll('#switch [data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go;});
+  const body=document.getElementById('mod-body');body.classList.remove('fade');void body.offsetWidth;body.classList.add('fade');
+  R[id](body);
+}
+function route(){const t=location.hash.replace('#','');if(MODS.some(m=>m.id===t))showModule(t);else showHome();window.scrollTo(0,0);}
+const goHome=()=>{if(location.hash){location.hash='';}else showHome();};
+document.getElementById('back').onclick=goHome;
+document.getElementById('home-btn').onclick=goHome;
+window.addEventListener('hashchange',route);
+
+/* theme */
+(function(){const b=document.getElementById('themebtn');let t=null;try{t=localStorage.getItem('srk-theme')}catch(e){}
+  if(t)document.documentElement.setAttribute('data-theme',t);
+  b.onclick=()=>{const cur=document.documentElement.getAttribute('data-theme');const dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches;const n=dark?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('srk-theme',n)}catch(e){}};})();
+
+
+const meeting = JSON.parse(document.getElementById('meeting-data').textContent);
+const gsc = meeting.gsc;
+const current = gsc.totals.current;
+const previous = gsc.totals.previous;
+const value = (n, format = fa) => Number.isFinite(n) ? format(n) : '—';
+const percent = n => fad(n * 100, 2) + '٪';
+const dateRange = period => esc(faSlash(period.start)) + ' تا ' + esc(faSlash(period.end));
+const metrics = [
+  ['کلیک', 'clicks', fa],
+  ['نمایش', 'impressions', fa],
+  ['نرخ کلیک', 'ctr', percent],
+  ['میانگین جایگاه', 'position', n => fad(n, 2)],
+];
+
+TECH = meeting.technical;
+applyRealExtras();
+applyCrawlJson(meeting.crawl);
+applyCompetitorsJson(meeting.competitors);
+const realModules = new Set(['rankings', 'technical']);
+if (!CMETA.is_sample) realModules.add('crawl');
+if (!RMETA.is_sample) realModules.add('radar');
+const rankingsModule = MODS.find(m => m.id === 'rankings');
+rankingsModule.desc = 'عملکرد استیل رخ در نتایج جستجوی گوگل و جایگاه کلمات هدف بر اساس Search Console';
+for (const module of MODS) {
+  if (!realModules.has(module.id)) module.desc = 'دادهٔ نمونه · ' + module.desc;
+}
+
+R.rankings = el => {
+  const intentLabels = {transactional:'خرید', commercial:'مقایسه‌ای', informational:'آموزشی'};
+  const cards = metrics.map(([label, key, format]) =>
+    '<div class="stat"><span class="l">' + label + '</span><span class="v">' + value(current[key], format) +
+    '</span><span class="d">دورهٔ قبل: ' + value(previous?.[key], format) + '</span></div>').join('');
+  const rows = gsc.keywords.map(k => {
+    const measured = k.found === true;
+    const cells = [esc(k.keyword), intentLabels[k.intent] || '—',
+      measured ? value(k.clicks) : '—', measured ? value(k.impressions) : '—',
+      measured ? value(k.ctr, percent) : '—', measured ? value(k.position, n => fad(n, 2)) : '—',
+      value(k.prev_position, n => fad(n, 2))];
+    return '<tr>' + cells.map(cell => '<td>' + cell + '</td>').join('') + '</tr>';
+  }).join('');
+  el.innerHTML = '<div class="card"><h3>عملکرد استیل رخ در گوگل</h3><p class="hint">دادهٔ واقعی Google Search Console · ' +
+    dateRange(gsc.period) + ' میلادی · دورهٔ قبل: ' + dateRange(gsc.previous_period) +
+    '</p><div class="grid g4">' + cards + '</div></div>' +
+    '<div class="card"><h3>کلمات کلیدی هدف</h3><p class="hint">جایگاه، میانگین ثبت‌شده در Search Console است. علامت — یعنی داده در دسترس نیست.</p>' +
+    '<div class="tw"><table><thead><tr><th>کلمهٔ کلیدی</th><th>نیت</th><th>کلیک</th><th>نمایش</th><th>نرخ کلیک</th><th>جایگاه</th><th>جایگاه قبلی</th></tr></thead><tbody>' +
+    rows + '</tbody></table></div></div>';
+};
+
+document.getElementById('sample-note').textContent =
+  'دادهٔ واقعی در ' + MODS.filter(m => realModules.has(m.id)).map(m => m.name).join('، ') + ' · سایر ماژول‌ها نمونه‌اند';
+document.getElementById('snapshot-date').textContent = 'نسخهٔ جلسه · ' + faSlash(gsc.generated_at.slice(0, 10)) + ' میلادی';
+document.getElementById('hero').innerHTML =
+  '<div style="grid-column:1/-1"><h1>عملکرد جستجوی استیل رخ</h1><p>دادهٔ واقعی Google Search Console · ' +
+  dateRange(gsc.period) + ' میلادی</p><div class="hero-kpis">' +
+  metrics.map(([label, key, format]) => '<div class="hk"><div class="l">' + label +
+    '</div><div class="v">' + value(current[key], format) + '</div></div>').join('') + '</div></div>';
+renderTiles();
+route();
+</script>
+
+</body></html>
